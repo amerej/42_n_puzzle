@@ -21,6 +21,7 @@ def make_puzzle(s, solvable, iterations):
 		p[swi] = 0
 	
 	p = make_goal(s)
+	
 	for i in range(iterations):
 		swap_empty(p)
 	

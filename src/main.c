@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/14 04:24:39 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/14 06:31:58 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ int main(int argc, char *argv[])
 	for (int i = 0; i < node->n; i++) {
 		for (int j = 0; j < node->n; j++) {
 			printf("%d ", node->grid[i][j]);
+		}
+		printf("\n");
+	}
+	make_goal(node, node->n);
+	printf("goal:\n");
+	for (int i = 0; i < node->n; i++) {
+		for (int j = 0; j < node->n; j++) {
+			printf("%d ", node->goal[i][j]);
 		}
 		printf("\n");
 	}
