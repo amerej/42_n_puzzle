@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/11 01:29:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/07 17:49:49 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/14 07:30:11 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 
 # define TRUE 1
 # define FALSE 0
-# define ERROR (-1)
-# define SUCCESS (0)
 
 # define NO_FREE 0x00
 # define FREE_PTR_1 0x01

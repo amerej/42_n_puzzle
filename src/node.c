@@ -6,69 +6,52 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:42:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/14 06:32:46 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/14 09:25:59 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
 
-int 			make_goal(t_node *node, int size)
+static int		**alloc_grid(int size)
 {
-	int		ts = size * size;
-	int		cur = 1;
-	int		x = 0;
-	int		ix = 1;
-	int		y = 0;
-	int		iy = 0;
+	int		**grid;
 
-	if (!(node->goal = init_grid(size))) {
-		printf("error: init_goal");
-		return (0);
+	if(!(grid = (int **)malloc(sizeof(int *) * size)))
+	{
+		perror("error : grid memory allocation");
+		return(NULL);
 	}
-	while(1) {
-		(*node->goal)[x + y * size] = cur;
-		if (!cur)
-			break;
-		cur++;
-		if (x + ix == size || x + ix < 0 || (ix != 0 && (*node->goal)[x + ix + y*size] != -1)) {
-			iy = ix;
-			ix = 0;
-		}
-		else if (y + iy == size || y + iy < 0 || (iy != 0 && (*node->goal)[x + (y+iy)*size] != -1)) {
-			ix = -iy;
-			iy = 0;
-		}
-		x += ix;
-		y += iy;
-		if (cur == size * size)
-			cur = 0;
+	if(!(grid[0] = (int *)malloc(sizeof(int) * size * size)))
+	{
+		perror("error : grid memory allocation");
+		return(NULL);
 	}
-	return (1);
+	return(grid);
 }
 
 int				**init_grid(int size)
 {
-	int		**grid, i, j;
+	int		**grid;
+	int		i;
+	int		j;
 
-	if (!(grid = (int **)malloc(sizeof(int *) * size)))
-	{
-		perror("error : grid memory allocation");
-		return (NULL);
-	}
-	if (!(grid[0] = (int *)malloc(sizeof(int) * size * size)))
-	{
-		perror("error : grid memory allocation");
-		return (NULL);
-	}
-	for(i = 0; i < size; i++) {
+	if (!(grid = alloc_grid(size)))
+		return(NULL);
+	i = 0;
+	while(i < size) {
 		grid[i] = (*grid + size * i);
+		i++;
 	}
-	for(i = 0; i < size; i++) {
-		for(j = 0; j < size; j++) {
+	i = 0;
+	while(i < size) {
+		j = 0;
+		while(j < size) {
 			grid[i][j] = -1;
+			j++;
 		}
+		i++;
 	}
-	return grid;
+	return (grid);
 }
 
 static t_node	*init_node(void)
@@ -81,6 +64,8 @@ static t_node	*init_node(void)
 		return (NULL);
 	}
 	node->grid = NULL;
+	node->goal = NULL;
+	node->n = 0;
 	node->parent = NULL;
 	return (node);
 }
