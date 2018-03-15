@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 01:35:35 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/15 22:50:05 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,22 @@ typedef struct			s_stack
 	
 }						t_stack;
 
+typedef struct			s_heap
+{
+	void				*data;
+	size_t				data_size;
+	struct s_heap		*next;
+	
+}						t_heap;
+
+typedef struct			s_heapp
+{
+	void				*data;
+	size_t				data_size;
+	struct s_heapp		*next;
+	
+}						t_heapp;
+
 typedef struct			s_goal
 {
 	int					cur;
@@ -46,14 +62,13 @@ typedef struct			s_goal
 
 typedef struct			s_node
 {
-	int					**board;
+	int					**grid;
+	int					**goal;
+	int					n;
 	int					h;
 	int					g;
 	int					f;
 	struct s_node		*parent;
-	
-	int					**goal;
-	int					n;
 }						t_node;
 
 typedef struct			s_node_test
@@ -68,7 +83,7 @@ int						get_puzzle(t_node *node, char *filename);
 void					destroy_node(t_node *node);
 
 t_node					*new_node(void);
-int						**init_board(int size);
+int						**init_grid(int size);
 
 t_stack					*stack_new_node(void const *data, size_t data_size);
 int						stack_is_empty(t_stack *root);

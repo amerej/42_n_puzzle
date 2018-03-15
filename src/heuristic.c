@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   heuristic.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/08 03:08:18 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 22:19:24 by aditsch          ###   ########.fr       */
+/*   Created: 2018/03/15 22:16:33 by aditsch           #+#    #+#             */
+/*   Updated: 2018/03/15 23:41:01 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "npuzzle.h"
+#include "npuzzle.h"
 
-int		check_arguments(int argc)
+int		hamming_distance(int **state, int **goal)
 {
-	if (argc != 2)
-	{
-		printf("error : invalid number of arguments\n");
-		return (0);
-	}
-	return (1);
+	
+}
+
+int		manhattan_distance(int **state, int **goal)
+{
+	
+}
+
+int		euclidean_distance(int **state, int **goal)
+{
+	
 }

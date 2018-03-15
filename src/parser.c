@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 09:07:09 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/15 22:19:19 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int			fill_goal(t_node *node)
 {
 	t_goal g = {1, 0, 1, 0, 0, node->n, node->n * node->n};
 
-	if (!(node->goal = init_board(g.s)))
+	if (!(node->goal = init_grid(g.s)))
 		return (ERROR);
 	while(TRUE) {
 		(*node->goal)[g.x + g.y * g.s] = g.cur;
@@ -41,7 +41,7 @@ static int			fill_goal(t_node *node)
 	return (SUCCESS);
 }
 
-static void			fill_board(t_node *node, char buffer[], int i)
+static void			fill_grid(t_node *node, char buffer[], int i)
 {
 	char		*end;
 	char		*ptr;
@@ -55,7 +55,7 @@ static void			fill_board(t_node *node, char buffer[], int i)
 		tmp = (int)strtol(ptr, &end, 10);
 		if (tmp == 0 && end == ptr)
 			break;
-		node->board[i][j] = tmp;
+		node->grid[i][j] = tmp;
 		ptr = end;
 		j++;
 	}
@@ -67,12 +67,12 @@ static int			parse_puzzle(t_node *node, char buffer[], int *i)
 	
 	if (!node->n)
 	{
-		if ((node->n = strtol(buffer, &ptr, 10)) && !node->board)
-			if (!(node->board = init_board(node->n)))
+		if ((node->n = strtol(buffer, &ptr, 10)) && !node->grid)
+			if (!(node->grid = init_grid(node->n)))
 				return(ERROR);
 	}
 	else
-		fill_board(node, buffer, (*i)++);
+		fill_grid(node, buffer, (*i)++);
 	return (SUCCESS);
 }
 

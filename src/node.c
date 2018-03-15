@@ -6,52 +6,52 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:42:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 08:58:13 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/15 22:19:09 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
 
-static int		**alloc_board(int size)
+static int		**alloc_grid(int size)
 {
-	int		**board;
+	int		**grid;
 
-	if(!(board = (int **)malloc(sizeof(int *) * size)))
+	if(!(grid = (int **)malloc(sizeof(int *) * size)))
 	{
-		perror("error : board memory allocation");
+		perror("error : grid memory allocation");
 		return(NULL);
 	}
-	if(!(board[0] = (int *)malloc(sizeof(int) * size * size)))
+	if(!(grid[0] = (int *)malloc(sizeof(int) * size * size)))
 	{
-		perror("error : board memory allocation");
+		perror("error : grid memory allocation");
 		return(NULL);
 	}
-	return(board);
+	return(grid);
 }
 
-int				**init_board(int size)
+int				**init_grid(int size)
 {
-	int		**board;
+	int		**grid;
 	int		i;
 	int		j;
 
-	if (!(board = alloc_board(size)))
+	if (!(grid = alloc_grid(size)))
 		return(NULL);
 	i = 0;
 	while(i < size) {
-		board[i] = (*board + size * i);
+		grid[i] = (*grid + size * i);
 		i++;
 	}
 	i = 0;
 	while(i < size) {
 		j = 0;
 		while(j < size) {
-			board[i][j] = -1;
+			grid[i][j] = -1;
 			j++;
 		}
 		i++;
 	}
-	return (board);
+	return (grid);
 }
 
 static t_node	*init_node(void)
@@ -63,7 +63,7 @@ static t_node	*init_node(void)
 		perror("error : node memory allocation");
 		return (NULL);
 	}
-	node->board = NULL;
+	node->grid = NULL;
 	node->goal = NULL;
 	node->n = 0;
 	node->parent = NULL;
