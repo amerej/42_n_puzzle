@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 23:54:09 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/16 00:25:32 by nrouzeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
 	// }
 
 	hamming_distance(node);
+	euclidean_distance(node);
 
 	// TEST STACK
 	// t_stack		*root = NULL;
