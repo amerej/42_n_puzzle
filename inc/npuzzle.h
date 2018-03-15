@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 23:42:37 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/15 23:46:56 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,6 @@ typedef struct			s_node
 	int					**grid;
 	int					**goal;
 	int					n;
-	int					h;
-	int					g;
-	int					f;
-	struct s_node		*parent;
 }						t_node;
 
 typedef struct			s_node_test
@@ -91,7 +87,7 @@ int						stack_push(t_stack **root, void const *data, size_t data_size);
 void					*stack_pop(t_stack **root);
 void					*stack_peek(t_stack *root);
 
-int		hamming_distance(int **state, int **goal);
-int		manhattan_distance(int **state, int **goal);
-int		euclidean_distance(int **state, int **goal);
+int		hamming_distance(t_node *node);
+int		manhattan_distance(t_node *node);
+int		euclidean_distance(t_node *node);
 #endif
