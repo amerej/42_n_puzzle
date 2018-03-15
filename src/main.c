@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 22:37:49 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/15 23:54:09 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,23 @@ int main(int argc, char *argv[])
 	
 	
 	//TEST AFFICHAGE
-	printf("n: %d\n", node->n);
-	printf("puzzle:\n");
-	for (int i = 0; i < node->n; i++) {
-		for (int j = 0; j < node->n; j++) {
-			printf("%3d ", node->grid[i][j]);
-		}
-		printf("\n");
-	}
-	printf("goal:\n");
-	for (int i = 0; i < node->n; i++) {
-		for (int j = 0; j < node->n; j++) {
-			printf("%3d ", node->goal[i][j]);
-		}
-		printf("\n");
-	}
+	// printf("n: %d\n", node->n);
+	// printf("puzzle:\n");
+	// for (int i = 0; i < node->n; i++) {
+	// 	for (int j = 0; j < node->n; j++) {
+	// 		printf("%3d ", node->grid[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
+	// printf("goal:\n");
+	// for (int i = 0; i < node->n; i++) {
+	// 	for (int j = 0; j < node->n; j++) {
+	// 		printf("%3d ", node->goal[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
+
+	hamming_distance(node);
 
 	// TEST STACK
 	// t_stack		*root = NULL;

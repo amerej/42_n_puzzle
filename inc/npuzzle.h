@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 23:46:56 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/15 23:58:24 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ typedef struct			s_goal
 	int					s;
 	int					ts;
 }						t_goal;
+
+typedef struct			s_position
+{
+	int					i;
+	int					j;
+}						t_position;
 
 typedef struct			s_node
 {

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:42:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 22:19:09 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/15 23:54:27 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static t_node	*init_node(void)
 	node->grid = NULL;
 	node->goal = NULL;
 	node->n = 0;
-	node->parent = NULL;
 	return (node);
 }
 
