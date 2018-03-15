@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 22:50:05 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/15 23:42:37 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,8 @@ int						stack_is_empty(t_stack *root);
 int						stack_push(t_stack **root, void const *data, size_t data_size);
 void					*stack_pop(t_stack **root);
 void					*stack_peek(t_stack *root);
+
+int		hamming_distance(int **state, int **goal);
+int		manhattan_distance(int **state, int **goal);
+int		euclidean_distance(int **state, int **goal);
 #endif
