@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:16:33 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/16 00:59:35 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/16 01:01:49 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,6 @@ int		euclidean_distance(t_node *node)
 				result += search_distance(node, y, x);
 		}
 	}
-	printf("euclidean : %d\n", result);
+	printf("euclidean= %d\n", result);
 	return (result);
 }
