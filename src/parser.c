@@ -6,42 +6,13 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 22:19:19 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/16 19:22:58 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
 
-static int			fill_goal(t_node *node)
-{
-	t_goal g = {1, 0, 1, 0, 0, node->n, node->n * node->n};
-
-	if (!(node->goal = init_grid(g.s)))
-		return (ERROR);
-	while(TRUE) {
-		(*node->goal)[g.x + g.y * g.s] = g.cur;
-		if (!g.cur)
-			break;
-		g.cur++;
-		if (g.x + g.ix == g.s || g.x + g.ix < 0 || 
-			(g.ix != 0 && (*node->goal)[g.x + g.ix + g.y * g.s] != -1)) {
-			g.iy = g.ix;
-			g.ix = 0;
-		}
-		else if (g.y + g.iy == g.s || g.y + g.iy < 0 || 
-			(g.iy != 0 && (*node->goal)[g.x + (g.y + g.iy) * g.s] != -1)) {
-			g.ix = -g.iy;
-			g.iy = 0;
-		}
-		g.x += g.ix;
-		g.y += g.iy;
-		if (g.cur == g.ts)
-			g.cur = 0;
-	}
-	return (SUCCESS);
-}
-
-static void			fill_grid(t_node *node, char buffer[], int i)
+static void			fill_board(t_puzzle *puzzle, char buffer[], int i)
 {
 	char		*end;
 	char		*ptr;
@@ -50,52 +21,69 @@ static void			fill_grid(t_node *node, char buffer[], int i)
 
 	j = 0;
 	ptr = buffer;
-	while (ptr < buffer + BUFFER_SIZE)
+	while(ptr < buffer + BUFFER_SIZE)
 	{
-		tmp = (int)strtol(ptr, &end, 10);
+		tmp = (t_type)strtol(ptr, &end, 10);
 		if (tmp == 0 && end == ptr)
 			break;
-		node->grid[i][j] = tmp;
+		
+		puzzle->board[i][j] = tmp;
 		ptr = end;
 		j++;
 	}
 }
 
-static int			parse_puzzle(t_node *node, char buffer[], int *i)
+static int			parse_puzzle(t_puzzle *puzzle, char buffer[])
 {
-	char	*ptr;
+	char				*ptr;
+	static t_type		i = 0;
 	
-	if (!node->n)
+	if (!puzzle->size)
 	{
-		if ((node->n = strtol(buffer, &ptr, 10)) && !node->grid)
-			if (!(node->grid = init_grid(node->n)))
+		if ((puzzle->size = strtol(buffer, &ptr, 10)) && !(puzzle->board))
+		{
+			if(puzzle->size < 3 || puzzle->size > 25)
+			{
+				ft_putstr_fd("Error: Bad size", 2);
 				return(ERROR);
+			}
+			if(!(puzzle->board = init_grid(puzzle->size)))
+			{
+				perror("Board mem alloc");
+				return(ERROR);
+			}
+		}
 	}
 	else
-		fill_grid(node, buffer, (*i)++);
+	{
+		fill_board(puzzle, buffer, i++);
+	}
 	return (SUCCESS);
 }
 
-int					get_puzzle(t_node *node, char *filename)
+int					get_puzzle(t_puzzle *puzzle, char *filename)
 {
 	FILE	*fp;
 	char	buffer[BUFFER_SIZE];
-	int		i;
 
 	fp = fopen(filename, "r");
-	i = 0;
 	if(!fp)
 	{
-		perror("Error opening file");
+		perror("Opening file");
 		return (ERROR);
 	}
-	while (TRUE) {
+	while(TRUE)
+	{
 		if (!fgets(buffer, BUFFER_SIZE, fp))
 			break;
-		if (!(parse_puzzle(node, buffer, &i)))
+		if (!(parse_puzzle(puzzle, buffer)))
 			return (ERROR);
 	}
-	if (!(fill_goal(node)))
-		return (ERROR);
-	return (SUCCESS);
+	if(!(puzzle->goal = init_grid(puzzle->size)))
+	{
+		perror("Goal mem alloc");
+		return(ERROR);
+	}
+	fill_goal(puzzle);
+	return(SUCCESS);
 }

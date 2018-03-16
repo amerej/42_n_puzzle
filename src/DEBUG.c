@@ -1,6 +1,6 @@
 #include "npuzzle.h"
 
-void	DEBUG_display_grid(int **grid, int size) {
+void	DEBUG_display_grid(t_type **grid, t_type size) {
 	
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {
@@ -10,22 +10,22 @@ void	DEBUG_display_grid(int **grid, int size) {
 	}
 }
 
-void	DEBUG_display_initial_state(t_node *node) {
+void	DEBUG_display_initial_state(t_puzzle *puzzle) {
 	
 	printf("\nPUZZLE INFORMATIONS\n\n");	
 	printf("Initial State\n");
-	DEBUG_display_grid(node->grid, node->n);
+	DEBUG_display_grid(puzzle->board, puzzle->size);
 	printf("\nGoal State\n");
-	DEBUG_display_grid(node->goal, node->n);
+	DEBUG_display_grid(puzzle->goal, puzzle->size);
 	printf("\n");
 }
 
-void	DEBUG_heuristics(t_node *node) {
+void	DEBUG_heuristics(t_puzzle *puzzle) {
 	
 	printf("HEURISTICS\n\n");
-	printf("Hamming: %d\n", hamming_distance(node));
-	printf("Manhattan: %d\n", manhattan_distance(node));
-	printf("Euclidean: %d\n", euclidean_distance(node));
+	printf("Hamming: %d\n", hamming_distance(puzzle));
+	printf("Manhattan: %d\n", manhattan_distance(puzzle));
+	printf("Euclidean: %d\n", euclidean_distance(puzzle));
 	printf("\n");
 }
 

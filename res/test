@@ -1,0 +1,17 @@
+	char				*ptr;
+	static t_ushort		i = 0;
+	
+	if (!(*puzzle)->size)
+	{
+		if (((*puzzle)->size = strtol(buffer, &ptr, 10)) && !(*puzzle)->board)
+		{
+			if(!init_grid(&(*puzzle)->board, (*puzzle)->size))
+			{
+				perror("Board mem alloc");
+				return(ERROR);
+			}
+		}
+	}
+	else
+		fill_board(&(*puzzle)->board, (*puzzle)->size, buffer, i++);
+	return (SUCCESS);

@@ -6,23 +6,23 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:16:33 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/16 02:17:58 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/16 17:47:03 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
 
-static t_position		get_position(int **goal, int size, int n)
+static t_position		get_position(t_type **goal, int size, t_type n)
 {
-	int				i;
-	int				j;
-	t_position		pos;
+	int			i;
+	int			j;
+	t_position	pos;
 
-	i = 0;
-	while(i < size)
+	i = -1;
+	while(++i < size)
 	{
-		j = 0;
-		while(j < size)
+		j = -1;
+		while(++j < size)
 		{
 			if(n == goal[i][j])
 			{
@@ -30,104 +30,84 @@ static t_position		get_position(int **goal, int size, int n)
 				pos.j = j;
 				return(pos);
 			}
-			j++;
 		}
-		i++;
 	}
 	return(pos);
 }
 
-int				hamming_distance(t_node *node)
+int				hamming_distance(t_puzzle *puzzle)
 {
-	int				i;
-	int				j;
-	int				res;
+	int			i;
+	int			j;
+	int			res;
 
-	i = 0;
+	i = -1;
 	res = 0;
-	while(i < node->n)
+	while(++i < puzzle->size)
 	{
-		j = 0;
-		while(j < node->n)
+		j = -1;
+		while(++j < puzzle->size)
 		{
-			if (node->grid[i][j] != 0 && node->grid[i][j] != node->goal[i][j])
+			if (puzzle->board[i][j] != 0 && 
+				puzzle->board[i][j] != puzzle->goal[i][j])
+			{
 				res++;
-			j++;
+			}
 		}
-		i++;
 	}
 	return(res);
 }
 
-int		manhattan_distance(t_node *node)
+int		manhattan_distance(t_puzzle *puzzle)
 {
 	int				i;
 	int				j;
 	int				res;
 	t_position		pos;
 
-	i = 0;
+	i = -1;
 	res = 0;
-	while(i < node->n)
+	while(++i < puzzle->size)
 	{
-		j = 0;
-		while(j < node->n)
+		j = -1;
+		while(++j < puzzle->size)
 		{
-			if (node->grid[i][j] != 0 && node->grid[i][j] != node->goal[i][j])
+			if (puzzle->board[i][j] != 0 && 
+				puzzle->board[i][j] != puzzle->goal[i][j])
 			{
-				pos = get_position(node->goal, node->n, node->grid[i][j]);
+				pos = get_position(puzzle->goal, puzzle->size, 
+					puzzle->board[i][j]);
 				res += (abs(i - pos.i) + abs(j - pos.j));
 			}
-			j++;
 		}
-		i++;
 	}
 	return(res);
 }
 
-int search_distance(t_node *node, int grid_y, int grid_x)
+int		euclidean_distance(t_puzzle *puzzle)
 {
-	int		dist_x;
-	int		dist_y;
-	int		goal_y;
-	int		goal_x;
-	int 	distance;
+	int				i;
+	int				j;
+	int				res;
+	t_position		pos;
+	t_position		dist;
 
-	goal_y = -1;
-	goal_x = -1;
-	distance = 0;
-	while (++goal_y < node->n)
-	{
-		goal_x = -1;
-		while (++goal_x < node->n)
-			if (node->grid[grid_y][grid_x] == node->goal[goal_y][goal_x])
-			{
-				dist_y = grid_y - goal_y;
-				dist_x = grid_x - goal_x;
-				distance = floor(sqrt(dist_y * dist_y + dist_x * dist_x));
-				break;
-			}
-	}
-	return (distance);
-}
-
-int		euclidean_distance(t_node *node)
-{
-	int		y;
-	int		x;
-	int 	res;
-
-	y = -1;
-	x = -1;
+	i = -1;
 	res = 0;
-	while (++y < node->n)
+	while(++i < puzzle->size)
 	{
-		x = -1;
-		while (++x < node->n)
+		j = -1;
+		while(++j < puzzle->size)
 		{
-			if (node->grid[y][x] != node->goal[y][x])
-				res += search_distance(node, y, x);
+			if (puzzle->board[i][j] != puzzle->goal[i][j])
+			{
+				pos = get_position(puzzle->goal, puzzle->size, 
+					puzzle->board[i][j]);
+				dist.i = i - pos.i;
+				dist.j = j - pos.j;
+				res += floor(sqrt(dist.i * dist.i + dist.j * dist.j));
+			}
 		}
 	}
-	return (res);
+	return(res);
 }

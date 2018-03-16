@@ -122,11 +122,11 @@ def hammingDistance(grid):
 
 def manhattanDistance(grid):
     def distance(i):
-        return 0 if grid[i] == 0 else abs(((grid[i]-1) / 3) - (i / 3)) + abs(((grid[i]-1) % 3) - (i % 3))
+        return 0 if grid[i] == 0 else abs(((grid[i]-1) / 8) - (i / 8)) + abs(((grid[i]-1) % 8) - (i % 8))
     return sum(distance(i) for i in xrange(len(grid)))
 
 if __name__ == '__main__':
-    eightPuzzleInstance = [3,0,7,2,8,1,6,4,5]
+    eightPuzzleInstance = [24,1,15,7,14,22,5,55,29,37,18,34,10,32,13,61,52,47,35,46,2,25,12,57,20,39,44,43,42,30,49,63,21,27,16,53,56,19,40,62,0,51,6,45,8,50,9,11,48,31,54,4,60,3,17,36,38,41,28,58,59,23,26,33]
     problem = EightPuzzleProblem(eightPuzzleInstance)
 
     print "Hamming Distance: ", hammingDistance(eightPuzzleInstance)
