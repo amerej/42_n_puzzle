@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:16:33 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/16 01:01:49 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/16 01:04:12 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int search_distance(t_node *node, int grid_y, int grid_x)
 			{
 				dist_y = grid_y - goal_y;
 				dist_x = grid_x - goal_x;
-				distance = ceil(sqrt(dist_y * dist_y + dist_x * dist_x));
+				distance = floor(sqrt(dist_y * dist_y + dist_x * dist_x));
 				break;
 			}
 	}
@@ -127,7 +127,7 @@ int		euclidean_distance(t_node *node)
 		x = -1;
 		while (++x < node->n)
 		{
-			if (node->grid[y][x] != 0 && node->grid[y][x] != node->goal[y][x])
+			if (node->grid[y][x] != node->goal[y][x])
 				result += search_distance(node, y, x);
 		}
 	}
