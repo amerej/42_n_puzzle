@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:16:33 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/16 01:04:12 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/16 02:17:58 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int				hamming_distance(t_node *node)
 		}
 		i++;
 	}
-	printf("hamming_distance= %d\n", res);
 	return(res);
 }
 
@@ -83,7 +82,6 @@ int		manhattan_distance(t_node *node)
 		}
 		i++;
 	}
-	printf("manhathan_distance= %d\n", res);
 	return(res);
 }
 
@@ -117,20 +115,19 @@ int		euclidean_distance(t_node *node)
 {
 	int		y;
 	int		x;
-	int 	result;
+	int 	res;
 
 	y = -1;
 	x = -1;
-	result = 0;
+	res = 0;
 	while (++y < node->n)
 	{
 		x = -1;
 		while (++x < node->n)
 		{
 			if (node->grid[y][x] != node->goal[y][x])
-				result += search_distance(node, y, x);
+				res += search_distance(node, y, x);
 		}
 	}
-	printf("euclidean= %d\n", result);
-	return (result);
+	return (res);
 }
