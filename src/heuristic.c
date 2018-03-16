@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:16:33 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/16 00:31:09 by nrouzeva         ###   ########.fr       */
+/*   Updated: 2018/03/16 00:59:35 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ static t_position		get_position(int **goal, int size, int n)
 		j = 0;
 		while(j < size)
 		{
-			printf("%d ", goal[i][j]);
+			if(n == goal[i][j])
+			{
+				pos.i = i;
+				pos.j = j;
+				return(pos);
+			}
 			j++;
 		}
 		i++;
-		printf("\n");
 	}
+	return(pos);
 }
 
 int				hamming_distance(t_node *node)
@@ -57,7 +62,29 @@ int				hamming_distance(t_node *node)
 
 int		manhattan_distance(t_node *node)
 {
+	int				i;
+	int				j;
+	int				res;
+	t_position		pos;
 
+	i = 0;
+	res = 0;
+	while(i < node->n)
+	{
+		j = 0;
+		while(j < node->n)
+		{
+			if (node->grid[i][j] != 0 && node->grid[i][j] != node->goal[i][j])
+			{
+				pos = get_position(node->goal, node->n, node->grid[i][j]);
+				res += (abs(i - pos.i) + abs(j - pos.j));
+			}
+			j++;
+		}
+		i++;
+	}
+	printf("manhathan_distance= %d\n", res);
+	return(res);
 }
 
 int search_distance(t_node *node, int grid_y, int grid_x)
