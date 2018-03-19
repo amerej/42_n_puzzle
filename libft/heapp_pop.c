@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   heapp_pop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 22:09:56 by aditsch          ###   ########.fr       */
+/*   Created: 2018/03/19 22:05:41 by aditsch           #+#    #+#             */
+/*   Updated: 2018/03/19 22:05:52 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "npuzzle.h"
+#include "libft.h"
 
-int main(int argc, char *argv[])
+void			*heapp_pop(t_heapp **head)
 {
-	t_puzzle	*puzzle;
+	t_heapp		*tmp;
+	void		*popped;
 
-	puzzle = NULL;
-	if (!(check_arguments(argc)))
-		return (-1);
-	if (!(puzzle = new_puzzle()))
-		return (-1);
-	if (!(get_puzzle(puzzle, argv[1])))
-		return (-1);
+	if(heapp_is_empty(*head))
+		return(NULL);
 	
-	//TEST DEBUG
-	DEBUG_display_initial_state(puzzle);
-	DEBUG_heuristics(puzzle);
-
-	// TEST STACK
-	// DEBUG_stack();
-
-	// TEST HEAPP
-	// DEBUG_heapp();
-	return (0);
+	tmp = *head;
+	(*head) = (*head)->next;
+	popped = tmp->data;
+	free(tmp);
+	return(popped);
 }

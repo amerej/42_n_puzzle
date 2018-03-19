@@ -69,7 +69,11 @@ SRCS = 	ft_memset.c \
 			stack_pop.c \
 			stack_push.c \
 			stack_new_node.c \
-			stack_is_empty.c
+			stack_is_empty.c \
+			heapp_pop.c \
+			heapp_push.c \
+			heapp_new_node.c \
+			heapp_is_empty.c
 
 OBJS = $(SRCS:.c=.o)
 
