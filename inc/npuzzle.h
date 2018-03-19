@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 19:28:08 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/19 23:52:48 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,17 @@ typedef struct			s_puzzle
 
 int						check_arguments(int argc);
 
-int						hamming_distance(t_puzzle *puzzle);
-int						manhattan_distance(t_puzzle *puzzle);
-int						euclidean_distance(t_puzzle *puzzle);
+int						hamming_distance(t_puzzle *puzzle, int i, int j);
+int						manhattan_distance(t_puzzle *puzzle, int i, int j);
+int						euclidean_distance(t_puzzle *puzzle, int i, int j);
+int						heuristic(t_puzzle *puzzle, 
+							int(*fn)(t_puzzle *puzzle, int i, int j));
 
 t_type					**init_grid(t_type size);
 void					fill_goal(t_puzzle *puzzle);
 t_puzzle				*new_puzzle(void);
 int						get_puzzle(t_puzzle *puzzle, char *filename);
 void					*destroy_puzzle(t_puzzle *puzzle);
-
-
 
 // DEBUG A VIRER
 typedef struct			s_node_test

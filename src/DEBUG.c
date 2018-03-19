@@ -23,9 +23,9 @@ void	DEBUG_display_initial_state(t_puzzle *puzzle) {
 void	DEBUG_heuristics(t_puzzle *puzzle) {
 	
 	printf("HEURISTICS\n\n");
-	printf("Hamming: %d\n", hamming_distance(puzzle));
-	printf("Manhattan: %d\n", manhattan_distance(puzzle));
-	printf("Euclidean: %d\n", euclidean_distance(puzzle));
+	printf("Hamming: %d\n", heuristic(puzzle, hamming_distance));
+	printf("Manhattan: %d\n", heuristic(puzzle, manhattan_distance));
+	printf("Euclidean: %d\n", heuristic(puzzle, euclidean_distance));
 	printf("\n");
 }
 
