@@ -5,7 +5,7 @@ OBJ_PATH= ./obj/
 INC_PATH= ./inc/
 LFT_PATH = ./libft/
 
-SRC_NAME= main.c utils.c parser.c stack.c heuristic.c puzzle.c DEBUG.c
+SRC_NAME= main.c utils.c parser.c stack.c heuristic.c puzzle.c heapp.c DEBUG.c
 OBJ_NAME= $(SRC_NAME:.c=.o)
 
 # CFLAGS= -Werror -Wextra -Wall

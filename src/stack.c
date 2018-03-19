@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 23:56:55 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/15 22:19:22 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/19 02:19:27 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_stack		*stack_new_node(void const *data, size_t data_size)
 		return(NULL);
 	if(data)
 	{
-		node->data = ft_memalloc(data_size);
+		node->data = ft_memalloc(sizeof(t_puzzle));
 		node->data_size = data_size;
 		ft_memcpy(node->data, (void *)data, data_size);
 	}

@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 02:32:13 by aditsch          ###   ########.fr       */
+/*   Created: 2018/03/19 00:20:44 by aditsch           #+#    #+#             */
+/*   Updated: 2018/03/19 08:05:16 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "npuzzle.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-int main(int argc, char *argv[])
+typedef struct	s_goal
 {
-	t_puzzle	*puzzle;
+	int			cur;
+	int			x;
+	int			ix;
+	int			y;
+	int			iy;
+	int			s;
+	int			ts;
+}				t_goal;
 
-	puzzle = NULL;
-	if (!(check_arguments(argc)))
-		return (-1);
-	if (!(puzzle = new_puzzle()))
-		return (-1);
-	if (!(get_puzzle(puzzle, argv[1])))
-		return (-1);
-	
-	//TEST AFFICHAGE
-	DEBUG_display_initial_state(puzzle);
-	DEBUG_heuristics(puzzle);
-  DEBUG_heapp();
-
-	// TEST STACK
-	// DEBUG_stack();
-	return (0);
-}
+typedef struct	s_position
+{
+	int			i;
+	int			j;
+}				t_position;
+#endif
