@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   stack_push.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 18:45:38 by aditsch          ###   ########.fr       */
+/*   Created: 2018/03/19 18:43:26 by aditsch           #+#    #+#             */
+/*   Updated: 2018/03/19 19:36:13 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "npuzzle.h"
+#include "data_structures.h"
 
-int main(int argc, char *argv[])
+int		stack_push(t_stack **head, void const *data, size_t data_size)
 {
-	t_puzzle	*puzzle;
+	t_stack		*node;
 
-	puzzle = NULL;
-	if (!(check_arguments(argc)))
-		return (-1);
-	if (!(puzzle = new_puzzle()))
-		return (-1);
-	if (!(get_puzzle(puzzle, argv[1])))
-		return (-1);
-	
-	//TEST DEBUG
-	DEBUG_display_initial_state(puzzle);
-	DEBUG_heuristics(puzzle);
-
-	// TEST STACK
-	// DEBUG_stack();
-
-	// TEST HEAPP
-	// DEBUG_heapp();
-	return (0);
+	if(!(node = stack_new_node(data, data_size)))
+		return(ERROR);
+	node->next = *head;
+	*head = node;
+	return(SUCCESS);
 }

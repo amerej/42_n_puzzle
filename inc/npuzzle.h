@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 08:12:42 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/19 19:28:08 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define NPUZZLE_H
 
 # include "../libft/libft.h"
-# include "data_struct.h"
 # include "utils.h"
 
 # define N_MAX 25
