@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 02:32:13 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/19 08:17:34 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ int main(int argc, char *argv[])
 	if (!(get_puzzle(puzzle, argv[1])))
 		return (-1);
 	
-	//TEST AFFICHAGE
+	//TEST DEBUG
 	DEBUG_display_initial_state(puzzle);
 	DEBUG_heuristics(puzzle);
-  DEBUG_heapp();
 
 	// TEST STACK
 	// DEBUG_stack();
+  
+  // TEST HEAPP
+  // DEBUG_heapp();
 	return (0);
 }
