@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 23:52:48 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/20 00:38:29 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,16 @@ typedef short 			t_type;
 
 typedef struct			s_puzzle
 {
-	t_type				**board;
 	t_type				**goal;
-	t_type				empty_space;
 	int					path;
 	t_type				size;
 }						t_puzzle;
+
+typedef struct			s_state
+{
+	t_type				**board;
+	t_position			empty_space;
+}						t_state;
 
 int						check_arguments(int argc);
 
