@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:42:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/20 07:06:59 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/20 22:24:08 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,18 @@ int					**init_grid(void)
 	return(grid);
 }
 
-static t_state		*init_state(void)
+t_state		*init_state(void)
 {
 	t_state		*state;
 
 	if(!(state = (t_state *)malloc(sizeof(*state))))
 	{
-		perror("Puzzle mem alloc");
+		perror("State mem alloc");
 		return(NULL);
 	}
 	state->board = NULL;
-	g_target = NULL;
-	g_size = 0;
+	state->path = 0;
+	state->empty = (t_position) {0, 0};
 	return(state);
 }
 
@@ -84,6 +84,8 @@ t_state				*new_state()
 
 	if(!(state = init_state()))
 		return(destroy_state(state));
+	g_target = NULL;
+	g_size = 0;
 	return(state);
 }
 

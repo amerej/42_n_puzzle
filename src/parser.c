@@ -6,13 +6,13 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/20 07:26:06 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/20 07:56:01 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
 
-static void			init_board(int **board, char buffer[], int i)
+static void			init_board(t_state *state, char buffer[], int i)
 {
 	char		*end;
 	char		*ptr;
@@ -26,7 +26,9 @@ static void			init_board(int **board, char buffer[], int i)
 		tmp = (int)strtol(ptr, &end, 10);
 		if (tmp == 0 && end == ptr)
 			break;
-		board[i][j] = tmp;
+		if(tmp == 0)
+			state->empty = (t_position){i, j};
+		state->board[i][j] = tmp;
 		ptr = end;
 		j++;
 	}
@@ -54,9 +56,7 @@ static int			get_board(t_state *state, char buffer[])
 		}
 	}
 	else
-	{
-		init_board(state->board, buffer, i++);
-	}
+		init_board(state, buffer, i++);
 	return (SUCCESS);
 }
 

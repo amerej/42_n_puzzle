@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/20 06:59:19 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/20 22:10:09 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@
 # include "../libft/libft.h"
 # include "utils.h"
 
-extern int **g_target;
-extern int g_size;
-
 # define N_MAX 25
-# define GRID_SIZE (N_MAX * N_MAX)
 # define BUFFER_SIZE (((3 * N_MAX) + (1 * (N_MAX - 1))) + 1)
 
 typedef struct		s_state
@@ -29,6 +25,9 @@ typedef struct		s_state
 	t_position		empty;
 	int				path;
 }					t_state;
+
+extern int 			**g_target;
+extern int 			g_size;
 
 int					check_arguments(int argc);
 
@@ -39,9 +38,13 @@ int					heuristic(int **board, int(*fn)(int **board, int i, int j));
 
 int					**init_grid();
 void				init_target();
+t_state				*init_state(void);
 t_state				*new_state(void);
 int					get_initial_state(t_state *state, char *filename);
 void				*destroy_state(t_state *state);
+
+t_state				*generate_move(t_state *state, int i, int j);
+void				get_successors(t_state *state, t_state *successors[]);
 
 // DEBUG A VIRER
 typedef struct		s_node_test
