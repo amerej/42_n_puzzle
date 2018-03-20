@@ -6,27 +6,31 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/20 00:23:39 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/20 07:04:40 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
 
+int			**g_target;
+int			g_size;
+
 int main(int argc, char *argv[])
 {
-	t_puzzle	*puzzle;
+	t_state		*state;
 
-	puzzle = NULL;
+	state = NULL;
 	if (!(check_arguments(argc)))
 		return (-1);
-	if (!(puzzle = new_puzzle()))
+	if (!(state = new_state()))
 		return (-1);
-	if (!(get_puzzle(puzzle, argv[1])))
+	if (!(get_initial_state(state, argv[1])))
 		return (-1);
+	init_target();
 	
 	//TEST DEBUG
-	DEBUG_display_initial_state(puzzle);
-	DEBUG_heuristics(puzzle);
+	DEBUG_display_initial_state(state->board);
+	DEBUG_heuristics(state->board);
 
 	// TEST STACK
 	// DEBUG_stack();

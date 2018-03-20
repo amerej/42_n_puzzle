@@ -6,25 +6,25 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:16:33 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 23:53:48 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/20 06:46:03 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
 
-static t_position	get_position(t_type **goal, int size, t_type n_board)
+static t_position	get_position(int n_board)
 {
 	int			i;
 	int			j;
 	t_position	pos;
 
 	i = -1;
-	while(++i < size)
+	while(++i < g_size)
 	{
 		j = -1;
-		while(++j < size)
+		while(++j < g_size)
 		{
-			if(n_board == goal[i][j])
+			if(n_board == g_target[i][j])
 			{
 				pos.i = i;
 				pos.j = j;
@@ -35,52 +35,52 @@ static t_position	get_position(t_type **goal, int size, t_type n_board)
 	return(pos);
 }
 
-int					hamming_distance(t_puzzle *puzzle, int i, int j)
+int					hamming_distance(int **board, int i, int j)
 {
-	int			res;
-	t_type		n_board;
-	t_type		n_goal;
+	int		res;
+	int		n_board;
+	int		n_target;
 
 	res = 0;
-	n_board = puzzle->board[i][j];
-	n_goal = puzzle->goal[i][j];
-	if (n_board && n_board != n_goal)
+	n_board = board[i][j];
+	n_target = g_target[i][j];
+	if (n_board && n_board != n_target)
 		res++;
 	return(res);
 }
 
-int					manhattan_distance(t_puzzle *puzzle, int i, int j)
+int					manhattan_distance(int **board, int i, int j)
 {
 	int				res;
-	t_type			n_board;
-	t_type			n_goal;
+	int				n_board;
+	int				n_target;
 	t_position		pos;
 
 	res = 0;
-	n_board = puzzle->board[i][j];
-	n_goal = puzzle->goal[i][j];
-	if(n_board && n_board != n_goal)
+	n_board = board[i][j];
+	n_target = g_target[i][j];
+	if(n_board && n_board != n_target)
 	{
-		pos = get_position(puzzle->goal, puzzle->size, n_board);
+		pos = get_position(n_board);
 		res += (abs(i - pos.i) + abs(j - pos.j));
 	}
 	return(res);
 }
 
-int					euclidean_distance(t_puzzle *puzzle, int i, int j)
+int					euclidean_distance(int **board, int i, int j)
 {
 	int				res;
-	t_type			n_board;
-	t_type			n_goal;
+	int			n_board;
+	int			n_target;
 	t_position		pos;
 	t_position		dist;
 
 	res = 0;
-	n_board = puzzle->board[i][j];
-	n_goal = puzzle->goal[i][j];
-	if (puzzle->board[i][j] != puzzle->goal[i][j])
+	n_board = board[i][j];
+	n_target = g_target[i][j];
+	if (n_board != n_target)
 	{
-		pos = get_position(puzzle->goal, puzzle->size, n_board);
+		pos = get_position(n_board);
 		dist.i = i - pos.i;
 		dist.j = j - pos.j;
 		res += floor(sqrt(dist.i * dist.i + dist.j * dist.j));
@@ -88,7 +88,7 @@ int					euclidean_distance(t_puzzle *puzzle, int i, int j)
 	return(res);
 }
 
-int					heuristic(t_puzzle *puzzle, int(*fn)(t_puzzle *puzzle, int i, int j))
+int					heuristic(int **board, int(*fn)(int **board, int i, int j))
 {
 	int		i;
 	int		j;
@@ -96,13 +96,11 @@ int					heuristic(t_puzzle *puzzle, int(*fn)(t_puzzle *puzzle, int i, int j))
 
 	i = -1;
 	res = 0;
-	while(++i < puzzle->size)
+	while(++i < g_size)
 	{
 		j = -1;
-		while(++j < puzzle->size)
-		{
-			res += fn(puzzle, i, j);
-		}
+		while(++j < g_size)
+			res += fn(board, i, j);
 	}
 	return(res);
 }

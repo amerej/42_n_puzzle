@@ -6,13 +6,13 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/16 19:22:58 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/20 07:26:06 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
 
-static void			fill_board(t_puzzle *puzzle, char buffer[], int i)
+static void			init_board(int **board, char buffer[], int i)
 {
 	char		*end;
 	char		*ptr;
@@ -23,31 +23,30 @@ static void			fill_board(t_puzzle *puzzle, char buffer[], int i)
 	ptr = buffer;
 	while(ptr < buffer + BUFFER_SIZE)
 	{
-		tmp = (t_type)strtol(ptr, &end, 10);
+		tmp = (int)strtol(ptr, &end, 10);
 		if (tmp == 0 && end == ptr)
 			break;
-		
-		puzzle->board[i][j] = tmp;
+		board[i][j] = tmp;
 		ptr = end;
 		j++;
 	}
 }
 
-static int			parse_puzzle(t_puzzle *puzzle, char buffer[])
+static int			get_board(t_state *state, char buffer[])
 {
-	char				*ptr;
-	static t_type		i = 0;
+	char			*ptr;
+	static int		i = 0;
 	
-	if (!puzzle->size)
+	if (!g_size)
 	{
-		if ((puzzle->size = strtol(buffer, &ptr, 10)) && !(puzzle->board))
+		if ((g_size = strtol(buffer, &ptr, 10)) && !state->board)
 		{
-			if(puzzle->size < 3 || puzzle->size > 25)
+			if(g_size < 3 || g_size > 25)
 			{
 				ft_putstr_fd("Error: Bad size", 2);
 				return(ERROR);
 			}
-			if(!(puzzle->board = init_grid(puzzle->size)))
+			if(!(state->board = init_grid()))
 			{
 				perror("Board mem alloc");
 				return(ERROR);
@@ -56,12 +55,12 @@ static int			parse_puzzle(t_puzzle *puzzle, char buffer[])
 	}
 	else
 	{
-		fill_board(puzzle, buffer, i++);
+		init_board(state->board, buffer, i++);
 	}
 	return (SUCCESS);
 }
 
-int					get_puzzle(t_puzzle *puzzle, char *filename)
+int					get_initial_state(t_state *state, char *filename)
 {
 	FILE	*fp;
 	char	buffer[BUFFER_SIZE];
@@ -76,14 +75,13 @@ int					get_puzzle(t_puzzle *puzzle, char *filename)
 	{
 		if (!fgets(buffer, BUFFER_SIZE, fp))
 			break;
-		if (!(parse_puzzle(puzzle, buffer)))
+		if (!(get_board(state, buffer)))
 			return (ERROR);
 	}
-	if(!(puzzle->goal = init_grid(puzzle->size)))
+	if(!(g_target = init_grid()))
 	{
-		perror("Goal mem alloc");
+		perror("Target mem alloc");
 		return(ERROR);
 	}
-	fill_goal(puzzle);
 	return(SUCCESS);
 }

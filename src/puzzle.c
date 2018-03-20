@@ -6,29 +6,29 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:42:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 00:42:57 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/20 07:06:59 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "npuzzle.h"
 
-void		fill_goal(t_puzzle *puzzle)
+void				init_target(void)
 {
-	t_goal g = {1, 0, 1, 0, 0, puzzle->size, puzzle->size * puzzle->size};
+	t_goal g = {1, 0, 1, 0, 0, g_size, g_size * g_size};
 
 	while(TRUE) {
-		(*puzzle->goal)[g.x + g.y * g.s] = g.cur;
+		(*g_target)[g.x + g.y * g.s] = g.cur;
 		if (!g.cur)
 			break;
 		g.cur++;
 		if(g.x + g.ix == g.s || g.x + g.ix < 0 || 
-			(g.ix != 0 && (*puzzle->goal)[g.x + g.ix + g.y * g.s] != -1))
+			(g.ix != 0 && (*g_target)[g.x + g.ix + g.y * g.s] != -1))
 		{
 			g.iy = g.ix;
 			g.ix = 0;
 		}
 		else if(g.y + g.iy == g.s || g.y + g.iy < 0 || 
-			(g.iy != 0 && (*puzzle->goal)[g.x + (g.y + g.iy) * g.s] != -1))
+			(g.iy != 0 && (*g_target)[g.x + (g.y + g.iy) * g.s] != -1))
 		{
 			g.ix = -g.iy;
 			g.iy = 0;
@@ -40,63 +40,60 @@ void		fill_goal(t_puzzle *puzzle)
 	}
 }
 
-t_type			**init_grid(t_type size)
+int					**init_grid(void)
 {
-	t_type	**grid;
-	t_type	i;
-	t_type	j;
+	int		**grid;
+	int		i;
+	int		j;
 
-	if(!(grid = (t_type **)malloc(size * sizeof(t_type *))))
+	if(!(grid = (int **)malloc(g_size * sizeof(int *))))
 		return(NULL);
-	if(!(grid[0] = (t_type *)malloc(size * size * sizeof(t_type))))
+	if(!(grid[0] = (int *)malloc(g_size * g_size * sizeof(int))))
 		return(NULL);
 	i = -1;
-	while(++i < size)
-	{
-		grid[i] = (*grid + size * i);
-	}
+	while(++i < g_size)
+		grid[i] = (*grid + g_size * i);
 	i = -1;
-	while(++i < size)
+	while(++i < g_size)
 	{
 		j = -1;
-		while(++j < size) {
+		while(++j < g_size)
 			grid[i][j] = -1;
-		}
 	}
 	return(grid);
 }
 
-static t_puzzle		*init_puzzle(void)
+static t_state		*init_state(void)
 {
-	t_puzzle	*puzzle;
+	t_state		*state;
 
-	if(!(puzzle = (t_puzzle *)malloc(sizeof(*puzzle))))
+	if(!(state = (t_state *)malloc(sizeof(*state))))
 	{
 		perror("Puzzle mem alloc");
 		return(NULL);
 	}
-	puzzle->board = NULL;
-	puzzle->goal = NULL;
-	puzzle->size = 0;
-	return(puzzle);
+	state->board = NULL;
+	g_target = NULL;
+	g_size = 0;
+	return(state);
 }
 
-t_puzzle		*new_puzzle()
+t_state				*new_state()
 {
-	t_puzzle	*puzzle;
+	t_state		*state;
 
-	if(!(puzzle = init_puzzle()))
-		return(destroy_puzzle(puzzle));
-	return(puzzle);
+	if(!(state = init_state()))
+		return(destroy_state(state));
+	return(state);
 }
 
-void			*destroy_puzzle(t_puzzle *puzzle)
+void			*destroy_state(t_state *state)
 {
-	if((puzzle->board))
-		ft_free_ptr((void **)&puzzle->board);
-	if(puzzle->goal)
-		ft_free_ptr((void **)&puzzle->goal);
-	if(puzzle)
-		ft_free_ptr((void **)&puzzle);
+	if((state->board))
+		ft_free_ptr((void **)&state->board);
+	if(g_target)
+		ft_free_ptr((void **)&g_target);
+	if(state)
+		ft_free_ptr((void **)&state);
 	return(NULL);
 }
