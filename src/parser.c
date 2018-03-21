@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "npuzzle.h"
+#include "../inc/npuzzle.h"
 
 static void			init_board(t_state *state, char buffer[], int i)
 {
@@ -38,7 +38,7 @@ static int			get_board(t_state *state, char buffer[])
 {
 	char			*ptr;
 	static int		i = 0;
-	
+
 	if (!g_size)
 	{
 		if ((g_size = strtol(buffer, &ptr, 10)) && !state->board)

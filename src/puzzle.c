@@ -6,11 +6,11 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:42:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/20 22:24:08 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/21 03:30:18 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "npuzzle.h"
+#include "../inc/npuzzle.h"
 
 void				init_target(void)
 {
@@ -74,7 +74,8 @@ t_state		*init_state(void)
 	}
 	state->board = NULL;
 	state->path = 0;
-	state->empty = (t_position) {0, 0};
+	state->empty = (t_position){0, 0};
+	state->paths = NULL;
 	return(state);
 }
 

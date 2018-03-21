@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/21 01:13:17 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/21 03:28:10 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct		s_state
 	int				**board;
 	t_position		empty;
 	int				path;
+	t_list			*paths;
+	
 }					t_state;
 
 extern int 			**g_target;

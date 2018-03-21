@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 06:54:10 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/20 06:58:51 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/21 03:20:36 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,11 +96,18 @@ void	DEBUG_heapp() {
 	node_5 = &(t_node_test){5, 5};
 	node_6 = &(t_node_test){6, 6};
 
-	heapp_push(&head, node_1, 4, sizeof(t_node_test));
-	heapp_push(&head, node_2, 3, sizeof(t_node_test));
-	heapp_push(&head, node_3, 2, sizeof(t_node_test));
+	// heapp_push(&head, node_1, 4, sizeof(t_node_test));
+	// heapp_push(&head, node_2, 3, sizeof(t_node_test));
+	// heapp_push(&head, node_3, 2, sizeof(t_node_test));
+	// heapp_push(&head, node_4, 1, sizeof(t_node_test));
+	// heapp_push(&head, node_5, 2, sizeof(t_node_test));
+	// heapp_push(&head, node_6, 1, sizeof(t_node_test));
+
+	heapp_push(&head, node_1, 1, sizeof(t_node_test));
+	heapp_push(&head, node_2, 1, sizeof(t_node_test));
+	heapp_push(&head, node_3, 1, sizeof(t_node_test));
 	heapp_push(&head, node_4, 1, sizeof(t_node_test));
-	heapp_push(&head, node_5, 2, sizeof(t_node_test));
+	heapp_push(&head, node_5, 1, sizeof(t_node_test));
 	heapp_push(&head, node_6, 1, sizeof(t_node_test));
 
 

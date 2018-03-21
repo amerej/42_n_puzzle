@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "npuzzle.h"
+#include "../inc/npuzzle.h"
 
 static t_position	get_position(int n_board)
 {
