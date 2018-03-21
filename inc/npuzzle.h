@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/20 22:10:09 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/21 01:13:17 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void				*destroy_state(t_state *state);
 
 t_state				*generate_move(t_state *state, int i, int j);
 void				get_successors(t_state *state, t_state *successors[]);
+void				copy_board(int **dst_board, int **src_board);
 
 // DEBUG A VIRER
 typedef struct		s_node_test
