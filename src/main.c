@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/22 04:53:02 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/22 16:06:57 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 	//TEST DEBUG
 	DEBUG_display_initial_state(state->board);
 	DEBUG_heuristics(state->board);
-    a_star_search(state, hamming_distance);
+    a_star_search(state, manhattan_distance);
 
 	//TEST SUCCESSORS
 	// t_state *successors[4];
@@ -68,9 +68,9 @@ int main(int argc, char *argv[])
 
 	return (0);
 }
-int         a_star_cost(t_state *state, int distance)
+int         a_star_cost(t_state *node, int distance)
 {
-    return(ft_list_size(state->paths) + distance);
+    return(ft_list_size(node->paths) + distance);
 }
 
 void        printList(t_list *n)
@@ -93,23 +93,29 @@ int         board_cmp(int **a, int **b)
     {
         j = -1;
 		while(++j < g_size)
-            if(a[i][j] != b[i][j])
-                return(FALSE);
+		{
+			if(a[i][j] != b[i][j])
+			{
+				return(FALSE);
+			}
+		}
 	}
     return(TRUE);
 }
 
 int         is_in_explored(int **board, t_list *explored)
 {
-	// printf("OK is_in_explored\n");
-    while(explored)
-    {
-        if(board_cmp(board, explored->content))
-            return(TRUE);
-        explored = explored->next;
-    }
-	// printf("OK out is_in_explored\n");
-    return(FALSE);
+	// printf("explored len = %d\n", ft_list_size(explored));
+	// printList(explored);
+	while(explored)
+	{
+	if(board_cmp(board, explored->content))
+		{
+			return(TRUE);
+		}
+		explored = explored->next;
+	}
+	return(FALSE);
 }
 
 void        a_star_search(t_state *state, int(*fn)(int **board, int i, int j))
@@ -133,21 +139,22 @@ void        a_star_search(t_state *state, int(*fn)(int **board, int i, int j))
         }
         get_successors(node, successors);
         i = -1;
-		// DEBUG_display_grid(explored->content);
         while(++i < 4)
         {
             if(successors[i] && !is_in_explored(successors[i]->board, explored))
             {
-				printList(explored);
-               	list_push_back(&explored, successors[i]->board, (g_size * g_size) * sizeof(int));
-            	heapp_push(&open, successors[i], a_star_cost(successors[i], heuristic(successors[i]->board, fn)), sizeof(t_state));
+				// DEBUG_display_grid(successors[i]->board);
+            	list_push_back(&explored, successors[i]->board, (g_size * g_size) * sizeof(int));
+				DEBUG_display_grid(successors[i]->board);
+				printf("\n");
+				heapp_push(&open, successors[i], a_star_cost(successors[i], heuristic(successors[i]->board, fn)), sizeof(t_state));
             }
         }
     }
     return ; // To implement
 }
 
-t_state		*generate_move(t_state *state, int i, int j)
+t_state		*generate_move(t_state *state, t_position pos)
 {
 	int			n;
 	t_state		*new_state;
@@ -155,24 +162,37 @@ t_state		*generate_move(t_state *state, int i, int j)
 	new_state = init_state();
 	new_state->board = init_grid();
 	copy_board(new_state->board, state->board);
-
-	n = state->board[state->empty.i + i][state->empty.j + j];
+	while(state->paths)
+	{
+		list_push_back(&new_state->paths, state->paths->content, sizeof(t_position));
+		state->paths = state->paths->next;
+	}
+	n = state->board[state->empty.i + pos.i][state->empty.j + pos.j];
 	new_state->board[state->empty.i][state->empty.j] = n;
-	new_state->board[state->empty.i + i][state->empty.j + j] = 0;
-	new_state->empty = (t_position){state->empty.i + i, state->empty.j + j};
-	new_state->path = state->path + 1;
+	new_state->board[state->empty.i + pos.i][state->empty.j + pos.j] = 0;
+	new_state->empty = (t_position){state->empty.i + pos.i, state->empty.j + pos.j};
+	list_push_back(&new_state->paths, &pos, sizeof(t_position));
 	return(new_state);
 }
 
 void		get_successors(t_state *state, t_state *successors[])
 {
-	ft_memset(successors, 0, 4);
+	t_position		pos;
+	
 	if(state->empty.j - 1 >= 0)
-		successors[0] = generate_move(state, 0, -1);
+		successors[0] = generate_move(state, (t_position){0, -1}); // successors[0] = generate_move(state, 0, -1);
+	else
+		successors[0] = NULL;
 	if(state->empty.i - 1 >= 0)
-		successors[1] = generate_move(state, -1, 0);
-	if(state->empty.i + 1 <= g_size)
-		successors[2] = generate_move(state, 1, 0);
-	if(state->empty.j + 1 <= g_size)
-		successors[3] = generate_move(state, 0, 1);
+		successors[1] = generate_move(state, (t_position){-1, 0}); // successors[1] = generate_move(state, -1, 0);
+	else
+		successors[1] = NULL;
+	if(state->empty.i + 1 < g_size)
+		successors[2] = generate_move(state, (t_position){1, 0}); // successors[2] = generate_move(state, 1, 0);
+	else
+		successors[2] = NULL;
+	if(state->empty.j + 1 < g_size)
+		successors[3] = generate_move(state, (t_position){0, 1}); // successors[3] = generate_move(state, 0, 1);
+	else
+		successors[3] = NULL;
 }
