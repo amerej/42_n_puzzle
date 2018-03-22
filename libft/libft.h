@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/11 01:29:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 19:41:10 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/22 00:32:19 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,6 @@ void				ft_exit_error(void);
 void				ft_exit_error_str(char *message);
 void				ft_free_ptr(void *ptr);
 void				ft_exit_perror(char *str);
+t_list				*list_new_node(void const *content, size_t content_size);
+int					list_push_back(t_list **head, void const *data, size_t data_size);
 #endif

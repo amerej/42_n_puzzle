@@ -73,7 +73,9 @@ SRCS = 	ft_memset.c \
 			heapp_pop.c \
 			heapp_push.c \
 			heapp_new_node.c \
-			heapp_is_empty.c
+			heapp_is_empty.c \
+			list_new_node.c \
+			list_push_back.c
 
 OBJS = $(SRCS:.c=.o)
 
