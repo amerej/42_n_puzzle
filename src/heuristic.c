@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:16:33 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/20 06:46:03 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/23 10:16:41 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_position	get_position(int n_board)
 			}
 		}
 	}
-	return(pos);
+	return((t_position){-1,-1});
 }
 
 int					hamming_distance(int **board, int i, int j)

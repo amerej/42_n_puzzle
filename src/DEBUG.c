@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   DEBUG.c                                            :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 06:54:10 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/21 03:20:36 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/23 10:18:19 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "npuzzle.h"
+#include "../inc/npuzzle.h"
 
 void	DEBUG_display_grid(int **grid) {
 	
@@ -41,86 +41,96 @@ void	DEBUG_heuristics(int **board) {
 	printf("\n");
 }
 
-void	DEBUG_stack() {
-	
-	t_stack		*root = NULL;
-	
-	t_node_test		*node_1, *node_2, *node_3, *node_4, *node_5, *node_6;
-	t_node_test		*popped;
-
-	node_1 = (t_node_test *)malloc(sizeof(t_node_test));
-	node_2 = (t_node_test *)malloc(sizeof(t_node_test));
-	node_3 = (t_node_test *)malloc(sizeof(t_node_test));
-	node_4 = (t_node_test *)malloc(sizeof(t_node_test));
-
-	node_1 = &(t_node_test){1, 1};
-	node_2 = &(t_node_test){2, 2};
-	node_3 = &(t_node_test){3, 3};
-	node_4 = &(t_node_test){4, 4};
-
-	stack_push(&root, node_1, sizeof(t_node_test));
-	stack_push(&root, node_2, sizeof(t_node_test));
-	stack_push(&root, node_3, sizeof(t_node_test));
-	stack_push(&root, node_4, sizeof(t_node_test));
-
-	printf("STACK DEBUG\n\n");
-	
-	if((popped = stack_pop(&root)))
-		printf("x=%d, y=%d popped from stack\n", popped->x, popped->y);
-
-	if((popped = stack_pop(&root)))
-		printf("x=%d, y=%d popped from stack\n", popped->x, popped->y);
-
-	if((popped = stack_pop(&root)))
-		printf("x=%d, y=%d popped from stack\n", popped->x, popped->y);
+void	printList(t_list *n)
+{
+	while (n != NULL)
+	{
+		DEBUG_display_grid(n->content);
+		printf("\n");
+		n = n->next;
+	}
 }
 
-void	DEBUG_heapp() {
+// void	DEBUG_stack() {
 	
-	t_heapp		*head = NULL;
+// 	t_stack		*root = NULL;
 	
-	t_node_test		*node_1, *node_2, *node_3, *node_4, *node_5, *node_6;
-	t_node_test		*popped;
+// 	t_node_test		*node_1, *node_2, *node_3, *node_4, *node_5, *node_6;
+// 	t_node_test		*popped;
 
-	node_1 = (t_node_test *)malloc(sizeof(t_node_test));
-	node_2 = (t_node_test *)malloc(sizeof(t_node_test));
-	node_3 = (t_node_test *)malloc(sizeof(t_node_test));
-	node_4 = (t_node_test *)malloc(sizeof(t_node_test));
-	node_5 = (t_node_test *)malloc(sizeof(t_node_test));
-	node_6 = (t_node_test *)malloc(sizeof(t_node_test));
+// 	node_1 = (t_node_test *)malloc(sizeof(t_node_test));
+// 	node_2 = (t_node_test *)malloc(sizeof(t_node_test));
+// 	node_3 = (t_node_test *)malloc(sizeof(t_node_test));
+// 	node_4 = (t_node_test *)malloc(sizeof(t_node_test));
 
-	node_1 = &(t_node_test){1, 1};
-	node_2 = &(t_node_test){2, 2};
-	node_3 = &(t_node_test){3, 3};
-	node_4 = &(t_node_test){4, 4};
-	node_5 = &(t_node_test){5, 5};
-	node_6 = &(t_node_test){6, 6};
+// 	node_1 = &(t_node_test){1, 1};
+// 	node_2 = &(t_node_test){2, 2};
+// 	node_3 = &(t_node_test){3, 3};
+// 	node_4 = &(t_node_test){4, 4};
 
-	// heapp_push(&head, node_1, 4, sizeof(t_node_test));
-	// heapp_push(&head, node_2, 3, sizeof(t_node_test));
-	// heapp_push(&head, node_3, 2, sizeof(t_node_test));
-	// heapp_push(&head, node_4, 1, sizeof(t_node_test));
-	// heapp_push(&head, node_5, 2, sizeof(t_node_test));
-	// heapp_push(&head, node_6, 1, sizeof(t_node_test));
+// 	stack_push(&root, node_1, sizeof(t_node_test));
+// 	stack_push(&root, node_2, sizeof(t_node_test));
+// 	stack_push(&root, node_3, sizeof(t_node_test));
+// 	stack_push(&root, node_4, sizeof(t_node_test));
 
-	heapp_push(&head, node_1, 1, sizeof(t_node_test));
-	heapp_push(&head, node_2, 1, sizeof(t_node_test));
-	heapp_push(&head, node_3, 1, sizeof(t_node_test));
-	heapp_push(&head, node_4, 1, sizeof(t_node_test));
-	heapp_push(&head, node_5, 1, sizeof(t_node_test));
-	heapp_push(&head, node_6, 1, sizeof(t_node_test));
+// 	printf("STACK DEBUG\n\n");
+	
+// 	if((popped = stack_pop(&root)))
+// 		printf("x=%d, y=%d popped from stack\n", popped->x, popped->y);
+
+// 	if((popped = stack_pop(&root)))
+// 		printf("x=%d, y=%d popped from stack\n", popped->x, popped->y);
+
+// 	if((popped = stack_pop(&root)))
+// 		printf("x=%d, y=%d popped from stack\n", popped->x, popped->y);
+// }
+
+// void	DEBUG_heapp() {
+	
+// 	t_heapp		*head = NULL;
+	
+// 	t_node_test		*node_1, *node_2, *node_3, *node_4, *node_5, *node_6;
+// 	t_node_test		*popped;
+
+// 	node_1 = (t_node_test *)malloc(sizeof(t_node_test));
+// 	node_2 = (t_node_test *)malloc(sizeof(t_node_test));
+// 	node_3 = (t_node_test *)malloc(sizeof(t_node_test));
+// 	node_4 = (t_node_test *)malloc(sizeof(t_node_test));
+// 	node_5 = (t_node_test *)malloc(sizeof(t_node_test));
+// 	node_6 = (t_node_test *)malloc(sizeof(t_node_test));
+
+// 	node_1 = &(t_node_test){1, 1};
+// 	node_2 = &(t_node_test){2, 2};
+// 	node_3 = &(t_node_test){3, 3};
+// 	node_4 = &(t_node_test){4, 4};
+// 	node_5 = &(t_node_test){5, 5};
+// 	node_6 = &(t_node_test){6, 6};
+
+// 	// heapp_push(&head, node_1, 4, sizeof(t_node_test));
+// 	// heapp_push(&head, node_2, 3, sizeof(t_node_test));
+// 	// heapp_push(&head, node_3, 2, sizeof(t_node_test));
+// 	// heapp_push(&head, node_4, 1, sizeof(t_node_test));
+// 	// heapp_push(&head, node_5, 2, sizeof(t_node_test));
+// 	// heapp_push(&head, node_6, 1, sizeof(t_node_test));
+
+// 	heapp_push(&head, node_1, 1, sizeof(t_node_test));
+// 	heapp_push(&head, node_2, 1, sizeof(t_node_test));
+// 	heapp_push(&head, node_3, 1, sizeof(t_node_test));
+// 	heapp_push(&head, node_4, 1, sizeof(t_node_test));
+// 	heapp_push(&head, node_5, 1, sizeof(t_node_test));
+// 	heapp_push(&head, node_6, 1, sizeof(t_node_test));
 
 
-	printf("HEAPP DEBUG\n\n");
-	if((popped = heapp_pop(&head)))
-		printf("x=%d, y=%d popped from heapp\n", popped->x, popped->y);
+// 	printf("HEAPP DEBUG\n\n");
+// 	if((popped = heapp_pop(&head)))
+// 		printf("x=%d, y=%d popped from heapp\n", popped->x, popped->y);
 
-	if((popped = heapp_pop(&head)))
-		printf("x=%d, y=%d popped from heapp\n", popped->x, popped->y);
+// 	if((popped = heapp_pop(&head)))
+// 		printf("x=%d, y=%d popped from heapp\n", popped->x, popped->y);
 
-	if((popped = heapp_pop(&head)))
-		printf("x=%d, y=%d popped from heapp\n", popped->x, popped->y);
+// 	if((popped = heapp_pop(&head)))
+// 		printf("x=%d, y=%d popped from heapp\n", popped->x, popped->y);
 
-	if((popped = heapp_pop(&head)))
-		printf("x=%d, y=%d popped from heapp\n", popped->x, popped->y);
-}
+// 	if((popped = heapp_pop(&head)))
+// 		printf("x=%d, y=%d popped from heapp\n", popped->x, popped->y);
+// }

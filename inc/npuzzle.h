@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/22 13:26:03 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/23 10:13:19 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void				*destroy_state(t_state *state);
 
 t_state				*generate_move(t_state *state, t_position pos);
 void				get_successors(t_state *state, t_state *successors[]);
-void				copy_board(int **dst_board, int **src_board);
+int					board_cmp(int **a, int **b);
+int					is_in_explored(int **board, t_list *explored);
+
+void				a_star_search(t_state *state, int(*fn)(int **board, int i, int j));
 
 // DEBUG A VIRER
 typedef struct		s_node_test

@@ -5,10 +5,10 @@ OBJ_PATH= ./obj/
 INC_PATH= ./inc/
 LFT_PATH = ./libft/
 
-SRC_NAME= main.c utils.c parser.c heuristic.c puzzle.c DEBUG.c
+SRC_NAME= main.c utils.c parser.c heuristic.c puzzle.c a_star_search.c common_search.c debug.c
 OBJ_NAME= $(SRC_NAME:.c=.o)
 
-# CFLAGS= -Werror -Wextra -Wall
+CFLAGS= -Werror -Wextra -Wall
 LDFLAGS = -L$(LFT_PATH)
 
 LDLIBS= -lm -lft
