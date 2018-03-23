@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/23 12:25:52 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/23 13:36:08 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_state				*new_state(void);
 int					get_initial_state(t_state *state, char *filename);
 void				*destroy_state(t_state *state);
 
+void				print_paths(t_list *paths);
 t_state				*generate_move(t_state *state, t_position pos);
 void				get_successors(t_state *state, t_state *successors[]);
 int					is_in_explored(int **board, t_list *explored);
