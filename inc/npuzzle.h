@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/23 10:13:19 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/23 12:25:52 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void				*destroy_state(t_state *state);
 
 t_state				*generate_move(t_state *state, t_position pos);
 void				get_successors(t_state *state, t_state *successors[]);
-int					board_cmp(int **a, int **b);
 int					is_in_explored(int **board, t_list *explored);
 
 void				a_star_search(t_state *state, int(*fn)(int **board, int i, int j));
@@ -64,4 +63,5 @@ void DEBUG_display_initial_state(int **board);
 void DEBUG_heuristics(int **board);
 void DEBUG_stack();
 void DEBUG_heapp();
+void printList(t_list *n);
 #endif

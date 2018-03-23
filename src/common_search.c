@@ -6,47 +6,17 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:57:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/23 10:17:18 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/23 13:10:37 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
 
-static void		copy_board(int **dst_board, int **src_board)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while (++i < g_size)
-	{
-		j = -1;
-		while(++j < g_size)
-			dst_board[i][j] = src_board[i][j];
-	}
-}
-
-int				board_cmp(int **a, int **b)
-{
-	int		i;
-	int		j;
-
-	i = -1;
-	while(++i < g_size)
-	{
-		j = -1;
-		while(++j < g_size)
-			if(a[i][j] != b[i][j])
-				return(FALSE);
-	}
-	return(TRUE);
-}
-
 int				is_in_explored(int **board, t_list *explored)
 {
 	while(explored)
 	{
-		if(board_cmp(board, explored->content))
+		if(!memcmp(*board, *((int **)(explored->content)), g_size * g_size * sizeof(int))) 
 			return(TRUE);
 		explored = explored->next;
 	}
@@ -57,10 +27,15 @@ t_state			*generate_move(t_state *state, t_position pos)
 {
 	int			n;
 	t_state		*new_state;
+	t_position	*path;
+
+	path = (t_position *)malloc(sizeof(t_position));
 
 	new_state = init_state();
 	new_state->board = init_grid();
-	copy_board(new_state->board, state->board);
+	memcpy(*(new_state->board), *(state->board), g_size * g_size * sizeof(int));
+	path->i = pos.i;
+	path->j = pos.j;
 	while(state->paths)
 	{
 		list_push_back(&new_state->paths, state->paths->content, sizeof(t_position));
@@ -70,7 +45,7 @@ t_state			*generate_move(t_state *state, t_position pos)
 	new_state->board[state->empty.i][state->empty.j] = n;
 	new_state->board[state->empty.i + pos.i][state->empty.j + pos.j] = 0;
 	new_state->empty = (t_position){state->empty.i + pos.i, state->empty.j + pos.j};
-	list_push_back(&new_state->paths, &pos, sizeof(t_position));
+	list_push_back(&new_state->paths, path, sizeof(t_position));
 	return(new_state);
 }
 
