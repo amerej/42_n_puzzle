@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 12:50:48 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/24 15:57:28 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@
 typedef struct		s_state
 {
 	int				**board;
+	int				paths_size;
 	t_position		empty;
-	int				path;
 	t_position		*paths;
-	size_t			paths_size;
 }					t_state;
 
 extern int 			**g_target;
@@ -53,6 +52,8 @@ int					is_in_explored(int **board, t_list *explored);
 void				a_star_search(t_state *state, int(*fn)(int **board, int i, 
 						int j));
 void				greedy_search(t_state *state, int(*fn)(int **board, int i, 
+						int j));
+void				uniform_cost_search(t_state *state, int(*fn)(int **board, int i, 
 						int j));
 
 // DEBUG A VIRER

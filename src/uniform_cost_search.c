@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   greedy_search.c                                    :+:      :+:    :+:   */
+/*   uniform_cost_search.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 15:50:18 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/24 16:02:52 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
 
-static int		greedy_cost(t_state *node, int distance)
+static int		uniform_cost(t_state *node, int distance)
 {
-	return(distance);
+	return(node->paths_size);
 }
 
 static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
@@ -29,14 +29,13 @@ static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 		{
 			list_push_back(explored, successors[i]->board, 
 				(g_size * g_size) * sizeof(int));
-			heapp_push(open, successors[i], 
-				greedy_cost(successors[i], heuristic(successors[i]->board, fn)), 
-				sizeof(t_state));
+			heapp_push(open, successors[i], uniform_cost(successors[i], 
+				heuristic(successors[i]->board, fn)), sizeof(t_state));
 		}
 	}
 }
 
-void			greedy_search(t_state *state, int(*fn)(int **board, int i, 
+void			uniform_cost_search(t_state *state, int(*fn)(int **board, int i, 
 					int j))
 {
 	t_list		*explored;

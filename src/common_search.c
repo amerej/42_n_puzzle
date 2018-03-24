@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:57:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 13:04:04 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/24 15:08:31 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,21 @@ static void			copy_paths(t_list *root, t_list **child)
 	}
 }
 
-static void		path_push_back(t_state *root, t_state *child, t_position *path)
+static void		path_push_back(t_state *root, t_state **child, t_position *path)
 {
 	t_position *tmp;
 
-	child->paths_size = root->paths_size;
-	child->paths = malloc(sizeof(t_position) * (child->paths_size)+1);
-	memcpy(child->paths, root->paths, sizeof(t_position) * (child->paths_size));
-	//child->paths = realloc(child->paths, sizeof(t_position) * (child->paths_size + 1));
-//	tmp = &child->paths[child->paths_size];
-//	tmp = path;
-//	++child->paths_size;
+	// printf("%d\n", root->paths_size);
+	// printf("%d %d\n", path->i, path->j);
+	
+	(*child)->paths_size = root->paths_size;
+	(*child)->paths = realloc((*child)->paths, sizeof(t_position) * ((*child)->paths_size + 1));
+	memcpy((*child)->paths, root->paths, sizeof(t_position) * ((*child)->paths_size));
+	//tmp = &(*child)->paths[(*child)->paths_size];
+	//tmp = path;
+	(*child)->paths[(*child)->paths_size] = *path;
+	// print_paths(*child);
+	++(*child)->paths_size;
 }
 
 t_state			*generate_move(t_state *state, t_position pos)
@@ -55,7 +59,6 @@ t_state			*generate_move(t_state *state, t_position pos)
 	t_position	*path;
 
 	path = (t_position *)malloc(sizeof(t_position));
-
 	new_state = init_state();
 	new_state->board = init_grid();
 	memcpy(*(new_state->board), *(state->board), g_size * g_size * sizeof(int));
@@ -67,7 +70,9 @@ t_state			*generate_move(t_state *state, t_position pos)
 	new_state->empty = (t_position){state->empty.i + pos.i, 
 		state->empty.j + pos.j};
 	// list_push_back(&new_state->paths, path, sizeof(t_position));
-	path_push_back(state, new_state, path);
+	// print_paths(new_state);
+	path_push_back(state, &new_state, path);
+	// print_paths(new_state);
 	return(new_state);
 }
 
