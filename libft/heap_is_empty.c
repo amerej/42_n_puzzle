@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   heap_is_empty.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/08 03:08:18 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 07:21:16 by aditsch          ###   ########.fr       */
+/*   Created: 2018/03/19 22:04:55 by aditsch           #+#    #+#             */
+/*   Updated: 2018/03/24 06:46:37 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/npuzzle.h"
+#include "libft.h"
 
-int			check_arguments(int argc)
+int		heap_is_empty(t_heap *head)
 {
-	if (argc != 2)
-	{
-		printf("error : invalid number of arguments\n");
-		return (ERROR);
-	}
-	return (SUCCESS);
+	return !head;
 }

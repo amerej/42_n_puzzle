@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/23 15:59:07 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/24 10:09:47 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int main(int argc, char *argv[])
 	DEBUG_display_initial_state(state->board);
 	DEBUG_heuristics(state->board);
 	
-	a_star_search(state, manhattan_distance);
-	return (0);
+	// a_star_search(state, manhattan_distance);
+	greedy_search(state, manhattan_distance);
+	return(0);
 }

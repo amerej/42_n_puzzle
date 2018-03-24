@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   heap_pop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/08 03:08:18 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 07:21:16 by aditsch          ###   ########.fr       */
+/*   Created: 2018/03/19 22:05:41 by aditsch           #+#    #+#             */
+/*   Updated: 2018/03/24 06:51:23 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/npuzzle.h"
+#include "libft.h"
 
-int			check_arguments(int argc)
+void			*heap_pop(t_heap **head)
 {
-	if (argc != 2)
-	{
-		printf("error : invalid number of arguments\n");
-		return (ERROR);
-	}
-	return (SUCCESS);
+	t_heap		*tmp;
+	void		*popped;
+
+	if(heap_is_empty(*head))
+		return(NULL);
+	tmp = *head;
+	(*head) = (*head)->next;
+	popped = tmp->data;
+	free(tmp);
+	return(popped);
 }

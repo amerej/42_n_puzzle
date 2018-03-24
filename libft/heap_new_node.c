@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   heap_new_node.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/08 03:08:18 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 07:21:16 by aditsch          ###   ########.fr       */
+/*   Created: 2018/03/19 22:04:22 by aditsch           #+#    #+#             */
+/*   Updated: 2018/03/24 06:48:02 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/npuzzle.h"
+#include "libft.h"
 
-int			check_arguments(int argc)
+t_heap		*heap_new_node(void const *data, size_t data_size)
 {
-	if (argc != 2)
+	t_heap		*node;
+
+	if(!(node = ft_memalloc(sizeof(t_heap))))
+		return(NULL);
+	if(data)
 	{
-		printf("error : invalid number of arguments\n");
-		return (ERROR);
+		node->data = ft_memalloc(sizeof(t_heap));
+		node->data_size = data_size;
+		ft_memcpy(node->data, (void *)data, data_size);
 	}
-	return (SUCCESS);
+	else
+	{
+		node->data = NULL;
+		node->data_size = 0;
+	}
+	node->next = NULL;
+	return(node);
 }

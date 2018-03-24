@@ -5,7 +5,16 @@ OBJ_PATH= ./obj/
 INC_PATH= ./inc/
 LFT_PATH = ./libft/
 
-SRC_NAME= main.c utils.c parser.c heuristic.c puzzle.c a_star_search.c common_search.c debug.c
+SRC_NAME= 	main.c \
+			utils.c \
+			parser.c \
+			heuristic.c \
+			puzzle.c \
+			common_search.c \
+			a_star_search.c \
+			greedy_search.c \
+			debug.c
+
 OBJ_NAME= $(SRC_NAME:.c=.o)
 
 #CFLAGS= -Werror -Wextra -Wall

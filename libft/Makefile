@@ -74,6 +74,10 @@ SRCS = 	ft_memset.c \
 			heapp_push.c \
 			heapp_new_node.c \
 			heapp_is_empty.c \
+			heap_pop.c \
+			heap_push.c \
+			heap_new_node.c \
+			heap_is_empty.c \
 			list_new_node.c \
 			list_push_back.c
 

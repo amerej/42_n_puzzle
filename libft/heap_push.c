@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   heap_push.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/08 03:08:18 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 07:21:16 by aditsch          ###   ########.fr       */
+/*   Created: 2018/03/19 22:05:17 by aditsch           #+#    #+#             */
+/*   Updated: 2018/03/24 07:39:05 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/npuzzle.h"
+#include "libft.h"
 
-int			check_arguments(int argc)
+int		heap_push(t_heap **head, void const *data, size_t data_size)
 {
-	if (argc != 2)
+	t_heap		*node;
+	t_heap		*tmp;
+
+	node = (*head);
+	if(!(tmp = heap_new_node(data, data_size)))
+		return(ERROR);
+	
+	if(node == NULL)
 	{
-		printf("error : invalid number of arguments\n");
-		return (ERROR);
+		tmp->next = *head;
+		(*head) = tmp;
 	}
-	return (SUCCESS);
+	else
+	{
+		while(node->next)
+			node = node->next;
+		tmp->next = node->next;
+		node->next = tmp;
+	}
+	return(SUCCESS);
 }

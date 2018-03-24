@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:57:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/23 18:48:09 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/24 08:59:40 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ int				is_in_explored(int **board, t_list *explored)
 {
 	while(explored)
 	{
-		if(!memcmp(*board, *((int **)(explored->content)), g_size * g_size * sizeof(int))) 
+		if(!memcmp(*board, *((int **)(explored->content)), 
+			g_size * g_size * sizeof(int)))
+		{
 			return(TRUE);
+		}
 		explored = explored->next;
 	}
 	return(FALSE);
@@ -45,12 +48,13 @@ t_state			*generate_move(t_state *state, t_position pos)
 	memcpy(*(new_state->board), *(state->board), g_size * g_size * sizeof(int));
 	path->i = pos.i;
 	path->j = pos.j;
-	print_paths(state->paths);
+	// print_paths(state->paths);
 	copy_paths(state->paths, &new_state->paths);
 	n = state->board[state->empty.i + pos.i][state->empty.j + pos.j];
 	new_state->board[state->empty.i][state->empty.j] = n;
 	new_state->board[state->empty.i + pos.i][state->empty.j + pos.j] = 0;
-	new_state->empty = (t_position){state->empty.i + pos.i, state->empty.j + pos.j};
+	new_state->empty = (t_position){state->empty.i + pos.i, 
+		state->empty.j + pos.j};
 	list_push_back(&new_state->paths, path, sizeof(t_position));
 	return(new_state);
 }
