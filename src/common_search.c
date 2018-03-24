@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:57:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 10:44:51 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/24 13:04:04 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ static void			copy_paths(t_list *root, t_list **child)
 	}
 }
 
+static void		path_push_back(t_state *root, t_state *child, t_position *path)
+{
+	t_position *tmp;
+
+	child->paths_size = root->paths_size;
+	child->paths = malloc(sizeof(t_position) * (child->paths_size)+1);
+	memcpy(child->paths, root->paths, sizeof(t_position) * (child->paths_size));
+	//child->paths = realloc(child->paths, sizeof(t_position) * (child->paths_size + 1));
+//	tmp = &child->paths[child->paths_size];
+//	tmp = path;
+//	++child->paths_size;
+}
+
 t_state			*generate_move(t_state *state, t_position pos)
 {
 	int			n;
@@ -48,14 +61,13 @@ t_state			*generate_move(t_state *state, t_position pos)
 	memcpy(*(new_state->board), *(state->board), g_size * g_size * sizeof(int));
 	path->i = pos.i;
 	path->j = pos.j;
-	// print_paths(state->paths);
-	copy_paths(state->paths, &new_state->paths);
 	n = state->board[state->empty.i + pos.i][state->empty.j + pos.j];
 	new_state->board[state->empty.i][state->empty.j] = n;
 	new_state->board[state->empty.i + pos.i][state->empty.j + pos.j] = 0;
 	new_state->empty = (t_position){state->empty.i + pos.i, 
 		state->empty.j + pos.j};
-	list_push_back(&new_state->paths, path, sizeof(t_position));
+	// list_push_back(&new_state->paths, path, sizeof(t_position));
+	path_push_back(state, new_state, path);
 	return(new_state);
 }
 
@@ -76,16 +88,14 @@ void			get_successors(t_state *state, t_state *successors[])
 		successors[3] = generate_move(state, (t_position){0, 1});
 }
 
-void	print_paths(t_list *paths)
+void	print_paths(t_state *state)
 {
 	t_position	*p;
+	int			i;
 	
+	i = -1;
 	printf("PATHS\n\n");
-	while(paths != NULL)
-	{
-		p = (t_position *)(paths->content);
-		printf("{%d,%d} ", p->i, p->j);
-		paths = paths->next;
-	}
+	while(++i < state->paths_size)
+		printf("{%d,%d} ", state->paths->i, state->paths->j);
 	printf("\n\n");
 }

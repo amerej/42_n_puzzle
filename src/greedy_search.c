@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 09:42:16 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/24 12:53:24 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 			printf("SOLUTION\n\n");
 			DEBUG_display_grid(node->board);
 			printf("\n");
-			print_paths(node->paths);
+			print_paths(node);
 			return ;
 		}
 		get_successors(node, successors);

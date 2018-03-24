@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:42:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/22 13:53:04 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/24 12:25:11 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ t_state		*init_state(void)
 	state->board = NULL;
 	state->empty = (t_position){0, 0};
 	state->paths = NULL;
+	state->paths_size = 0;
 	return(state);
 }
 
