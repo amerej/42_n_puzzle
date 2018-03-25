@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/25 12:00:22 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/25 16:53:47 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,14 @@ void			a_star_search(t_state *state, int(*fn)(int **board, int i,
 		node = heapp_pop(&open);
 		if(!memcmp((*node->board), *g_target, g_size * g_size * sizeof(int)))
 		{
-			// To implement
+			printf("SOLUTION:\n\n");
 			DEBUG_display_grid(node->board);
 			printf("\n");
+			printf("OPEN LIST: %d\n\n", heapp_size(open));
+			printf("CLOSED LIST: %d\n\n", ft_list_size(explored));
+			printf("PATHS:\n\n");
 			print_paths(node);
+			printf("\n");
 			return ;
 		}
 		get_successors(node, successors);

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/25 11:59:00 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/25 17:56:35 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 		{
 			list_push_back(explored, successors[i]->board, 
 				(g_size * g_size) * sizeof(int));
-			heapp_push(open, successors[i], 
-				greedy_cost(successors[i], heuristic(successors[i]->board, fn)), 
+			heapp_push(open, successors[i], greedy_cost(successors[i], 
+				heuristic(successors[i]->board, fn)), 
 				sizeof(t_state));
 		}
 	}
@@ -54,14 +54,20 @@ void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 		node = heapp_pop(&open);
 		if(!memcmp((*node->board), *g_target, g_size * g_size * sizeof(int)))
 		{
-			printf("SOLUTION\n\n");
+			printf("SOLUTION:\n\n");
 			DEBUG_display_grid(node->board);
 			printf("\n");
+			printf("OPEN LIST: %d\n\n", heapp_size(open));
+			printf("CLOSED LIST: %d\n\n", ft_list_size(explored));
+			printf("PATHS:\n\n");
 			print_paths(node);
+			printf("\n");
 			return ;
 		}
 		get_successors(node, successors);
 		add_to_open_heapp(successors, &open, &explored, fn);
+		printf("OPEN LIST: %d\n\n", heapp_size(open));
+		printf("CLOSED LIST: %d\n\n", ft_list_size(explored));
 	}
 	return ;
 }

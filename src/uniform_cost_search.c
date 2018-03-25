@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/25 11:58:34 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/25 17:15:53 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,14 @@ void			uniform_cost_search(t_state *state)
 		node = heapp_pop(&open);
 		if(!memcmp((*node->board), *g_target, g_size * g_size * sizeof(int)))
 		{
-			printf("SOLUTION\n\n");
+			printf("SOLUTION:\n\n");
 			DEBUG_display_grid(node->board);
 			printf("\n");
+			printf("OPEN LIST: %d\n\n", heapp_size(open));
+			printf("CLOSED LIST: %d\n\n", ft_list_size(explored));
+			printf("PATHS:\n\n");
 			print_paths(node);
+			printf("\n");
 			return ;
 		}
 		get_successors(node, successors);

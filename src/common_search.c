@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:57:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/25 15:36:43 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/25 16:06:51 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ void	print_paths(t_state *state)
 	
 	i = -1;
 	while(++i < state->paths_size)
-		printf("{%d,%d} ", state->paths->i, state->paths->j);
+		printf("{%d,%d} ", state->paths[i].i, state->paths[i].j);
 	printf("\n");
 }
