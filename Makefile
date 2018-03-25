@@ -13,6 +13,7 @@ SRC_NAME= 	main.c \
 			common_search.c \
 			a_star_search.c \
 			greedy_search.c \
+			uniform_cost_search.c \
 			debug.c
 
 OBJ_NAME= $(SRC_NAME:.c=.o)

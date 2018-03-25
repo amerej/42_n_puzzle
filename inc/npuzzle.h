@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 10:30:03 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/25 11:37:14 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 typedef struct		s_state
 {
 	int				**board;
+	int				paths_size;
 	t_position		empty;
-	int				path;
-	t_list			*paths;
+	t_position		*paths;
 }					t_state;
 
 extern int 			**g_target;
@@ -44,15 +44,16 @@ t_state				*new_state(void);
 int					get_initial_state(t_state *state, char *filename);
 void				*destroy_state(t_state *state);
 
-void				print_paths(t_list *paths);
+void				print_paths(t_state *state);
 t_state				*generate_move(t_state *state, t_position pos);
-void				get_successors(t_state *state, t_state *successors[]);
+void				get_successors(t_state *state, t_state *successors[4]);
 int					is_in_explored(int **board, t_list *explored);
 
 void				a_star_search(t_state *state, int(*fn)(int **board, int i, 
 						int j));
 void				greedy_search(t_state *state, int(*fn)(int **board, int i, 
 						int j));
+void				uniform_cost_search(t_state *state);
 
 // DEBUG A VIRER
 typedef struct		s_node_test
