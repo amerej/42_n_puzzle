@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 15:50:18 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/25 11:59:00 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,13 @@ void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 	explored = NULL;
 	open = NULL;
 	list_push_back(&explored, state->board, (g_size * g_size) * sizeof(int));
-	heapp_push(&open, state, heuristic(state->board, fn), 
+	heapp_push(&open, state, greedy_cost(state, heuristic(state->board, fn)), 
 		sizeof(t_state));
 	while(!heapp_is_empty(open))
 	{
 		node = heapp_pop(&open);
-		// printf("STEP\n");
-		// DEBUG_display_grid(node->board);
-		// printf("\n");
 		if(!memcmp((*node->board), *g_target, g_size * g_size * sizeof(int)))
 		{
-			// To implement
 			printf("SOLUTION\n\n");
 			DEBUG_display_grid(node->board);
 			printf("\n");
@@ -67,5 +63,5 @@ void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 		get_successors(node, successors);
 		add_to_open_heapp(successors, &open, &explored, fn);
 	}
-	return ; // To implement
+	return ;
 }

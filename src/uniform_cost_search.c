@@ -6,19 +6,19 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/24 16:02:52 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/25 11:58:34 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
 
-static int		uniform_cost(t_state *node, int distance)
+static int		uniform_cost(t_state *node)
 {
 	return(node->paths_size);
 }
 
 static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
-					t_list **explored, int(*fn)(int **board, int i, int j))
+					t_list **explored)
 {
 	int		i;
 
@@ -29,14 +29,13 @@ static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 		{
 			list_push_back(explored, successors[i]->board, 
 				(g_size * g_size) * sizeof(int));
-			heapp_push(open, successors[i], uniform_cost(successors[i], 
-				heuristic(successors[i]->board, fn)), sizeof(t_state));
+			heapp_push(open, successors[i], uniform_cost(successors[i]), 
+				sizeof(t_state));
 		}
 	}
 }
 
-void			uniform_cost_search(t_state *state, int(*fn)(int **board, int i, 
-					int j))
+void			uniform_cost_search(t_state *state)
 {
 	t_list		*explored;
 	t_heapp		*open;
@@ -46,17 +45,12 @@ void			uniform_cost_search(t_state *state, int(*fn)(int **board, int i,
 	explored = NULL;
 	open = NULL;
 	list_push_back(&explored, state->board, (g_size * g_size) * sizeof(int));
-	heapp_push(&open, state, heuristic(state->board, fn), 
-		sizeof(t_state));
+	heapp_push(&open, state, uniform_cost(state), sizeof(t_state));
 	while(!heapp_is_empty(open))
 	{
 		node = heapp_pop(&open);
-		// printf("STEP\n");
-		// DEBUG_display_grid(node->board);
-		// printf("\n");
 		if(!memcmp((*node->board), *g_target, g_size * g_size * sizeof(int)))
 		{
-			// To implement
 			printf("SOLUTION\n\n");
 			DEBUG_display_grid(node->board);
 			printf("\n");
@@ -64,7 +58,7 @@ void			uniform_cost_search(t_state *state, int(*fn)(int **board, int i,
 			return ;
 		}
 		get_successors(node, successors);
-		add_to_open_heapp(successors, &open, &explored, fn);
+		add_to_open_heapp(successors, &open, &explored);
 	}
-	return ; // To implement
+	return ;
 }
