@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:57:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/25 12:00:26 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/25 15:36:43 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@ int				is_in_explored(int **board, t_list *explored)
 		explored = explored->next;
 	}
 	return(FALSE);
-}
-
-static void			cpy_paths(t_state *root, t_state *child)
-{
-	for(int i = 0; i < root->paths_size; i++){
-		child->paths[i] = root->paths[i]; 
-	}
 }
 
 static void		path_push_back(t_state *root, t_state **child, t_position *path)
