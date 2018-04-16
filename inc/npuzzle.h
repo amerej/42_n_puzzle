@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/25 15:36:55 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/03/28 20:36:09 by nrouzeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@
 # define N_MAX 25
 # define BUFFER_SIZE (((3 * N_MAX) + (1 * (N_MAX - 1))) + 1)
 
+typedef struct		s_btree
+{
+	struct s_btree	*left;
+	struct s_btree	*right;
+	struct s_btree	*next;
+	int 			value;
+	int				took;
+}					t_btree;
+
 typedef struct		s_state
 {
 	int				**board;
@@ -29,7 +38,11 @@ typedef struct		s_state
 
 extern int 			**g_target;
 extern int 			g_size;
+////////////////
+int		tb_explore(t_btree	**explored, int **board, int x, int y);
+void	tb_add(t_btree	**explored, int **board, int x, int y);
 
+////////////////
 int					check_arguments(int argc);
 
 int					hamming_distance(int **board, int i, int j);

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/25 17:26:24 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/04/14 13:27:59 by nrouzeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int main(int argc, char *argv[])
 	DEBUG_display_initial_state(state->board);
 	DEBUG_heuristics(state->board);
 
-	// printf("SOLUTION A* SEARCH\n\n");
-	// a_star_search(state, manhattan_distance);
+//	 printf("SOLUTION A* SEARCH\n\n");
+//	 a_star_search(state, manhattan_distance);
 	printf("SOLUTION GREEDY SEARCH\n\n");
 	greedy_search(state, manhattan_distance);
 	// printf("SOLUTION UNIFORM COST SEARCH\n\n");

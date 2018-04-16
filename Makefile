@@ -14,6 +14,7 @@ SRC_NAME= 	main.c \
 			a_star_search.c \
 			greedy_search.c \
 			uniform_cost_search.c \
+			t_btree.c \
 			debug.c
 
 OBJ_NAME= $(SRC_NAME:.c=.o)
