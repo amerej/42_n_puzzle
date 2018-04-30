@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:57:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/04/11 00:03:31 by nrouzeva         ###   ########.fr       */
+/*   Updated: 2018/04/30 23:11:10 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ t_state			*generate_move(t_state *state, t_position pos)
 	new_state->board[state->empty.i + pos.i][state->empty.j + pos.j] = 0;
 	new_state->empty = (t_position){state->empty.i + pos.i, 
 		state->empty.j + pos.j};
-	new_state->paths_size = state->paths_size + 1;
-//	path_push_back(state, &new_state, path);
+	path_push_back(state, &new_state, path);
 	free(path);
 	return(new_state);
 }
