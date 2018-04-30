@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/04/30 23:14:05 by nrouzeva         ###   ########.fr       */
+/*   Updated: 2018/04/30 23:29:52 by nrouzeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 	explored = NULL;
 	open = NULL;
 	tb_add(&explored, state->board, 0, 0);
-	heapp_push(&open, state, greedy_cost(state, heuristic(state->board, fn)), sizeof(t_state));
+	heapp_push(&open, state, 
+		greedy_cost(state, heuristic(state->board, fn)), sizeof(t_state));
 	while(!heapp_is_empty(open))
 	{
 		node = heapp_pop(&open);
@@ -67,10 +68,7 @@ void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 			printf("PATHS:\n\n");
 			print_paths(node);
 			printf("\n");
-			free(node->paths);
-			free(node->board[0]);
-			free(node->board);
-			free(node);
+			free_state(node);
 			free_explored(&explored);
 			if(open)
 				free_open(&open);
@@ -78,12 +76,7 @@ void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 		}
 		get_successors(node, successors);
 		add_to_open_heapp(successors, &open, &explored, fn);
-		free((node)->paths);
-		free((node)->board[0]);
-		free((node)->board);
-		free(node);
-//		if (ok++ == 1)
-//			while (1);
+		free_state(node);
 	}
 	free_explored(&explored);
 	if(open)

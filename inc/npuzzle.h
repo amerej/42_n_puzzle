@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/04/30 22:23:44 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/04/30 23:03:42 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ void				uniform_cost_search(t_state *state);
 
 void				free_explored(t_btree **explored);
 void				free_open(t_heapp **open);
+void				free_state(t_state *node);
+
+
+
 
 // DEBUG A VIRER
 typedef struct		s_node_test
