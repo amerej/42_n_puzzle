@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 22:05:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/04/14 10:32:43 by nrouzeva         ###   ########.fr       */
+/*   Updated: 2018/04/30 23:18:27 by nrouzeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		heapp_push(t_heapp **head, void const *data, int priority, size_t data_size
 	if(!(tmp = heapp_new_node(data, priority, data_size)))
 		return(ERROR);
 	
-	if((node == NULL || node->priority >= priority))
+	if((node == NULL || node->priority > priority))
 	{
 		tmp->next = *head;
 		(*head) = tmp;
