@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 11:45:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 19:30:46 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/04/20 16:20:28 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-# define BUFF_SIZE  64
+# define BUFF_SIZE 64
 
-int						get_next_line(int const fd, char **line);
+int		get_next_line(int const fd, char **line);
 #endif

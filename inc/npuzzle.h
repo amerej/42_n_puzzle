@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/28 20:36:09 by nrouzeva         ###   ########.fr       */
+/*   Updated: 2018/04/30 22:23:44 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ typedef struct		s_state
 
 extern int 			**g_target;
 extern int 			g_size;
+
 ////////////////
-int		tb_explore(t_btree	**explored, int **board, int x, int y);
-void	tb_add(t_btree	**explored, int **board, int x, int y);
+int					tb_explore(t_btree **explored, int **board, int x, int y);
+void				tb_add(t_btree **explored, int **board, int x, int y);
 
 ////////////////
 int					check_arguments(int argc);
@@ -67,6 +68,9 @@ void				a_star_search(t_state *state, int(*fn)(int **board, int i,
 void				greedy_search(t_state *state, int(*fn)(int **board, int i, 
 						int j));
 void				uniform_cost_search(t_state *state);
+
+void				free_explored(t_btree **explored);
+void				free_open(t_heapp **open);
 
 // DEBUG A VIRER
 typedef struct		s_node_test

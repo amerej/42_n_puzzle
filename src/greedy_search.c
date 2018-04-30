@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/04/14 14:08:02 by nrouzeva         ###   ########.fr       */
+/*   Updated: 2018/04/30 22:25:16 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,22 @@ static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 	i = -1;
 	while(++i < 4)
 	{
-		if(successors[i] && !tb_explore(explored, successors[i]->board,  0, 0))
+		if(successors[i] && !tb_explore(explored, successors[i]->board, 0, 0))
 		{
-//			printf("%d, %d\n", successors[i]->empty.j, successors[i]->empty.i);
 			tb_add(explored, successors[i]->board, 0, 0);
 			heapp_push(open, successors[i], greedy_cost(successors[i], 
 				heuristic(successors[i]->board, fn)), 
 				sizeof(t_state));
 		}
+		else if (successors[i])
+		{
+			free(successors[i]->paths);
+			free(successors[i]->board[0]);
+			free(successors[i]->board);
+			free(successors[i]);
+		}
 	}
 }
-
-void		print_heap(t_heapp **open)
-{
-	t_heapp *node = (*open);
-	t_state *state = (*open)->data;
-	printf("PRIORITY = %d\n", node->priority);
-	printf("%d, %d\n", state->empty.j, state->empty.i);
-	if (node->next)
-		print_heap(&node->next);
-}
-
 
 void			greedy_search(t_state *state, int(*fn)(int **board, int i, 
 					int j))
@@ -74,6 +69,13 @@ void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 //			printf("PATHS:\n\n");
 //			print_paths(node);
 			printf("\n");
+			free(node->paths);
+			free(node->board[0]);
+			free(node->board);
+			free(node);
+			free_explored(&explored);
+			if(open)
+				free_open(&open);
 			return ;
 		}
 		get_successors(node, successors);
@@ -81,7 +83,13 @@ void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 //		print_heap(&open);
 //		DEBUG_display_grid(node->board);
 //		printf("\n");
-//		sleep(5);
+		free((node)->paths);
+		free((node)->board[0]);
+		free((node)->board);
+		free(node);
 	}
+	free_explored(&explored);
+	if(open)
+		free_open(&open);
 	return ;
 }
