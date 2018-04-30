@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 03:08:18 by aditsch           #+#    #+#             */
-/*   Updated: 2018/04/30 23:05:16 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 01:47:24 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,14 @@ void	free_explored(t_btree **explored)
 
 void	free_open(t_heapp **open)
 {
-	if (!(*open))
-		return ;
-	free_open(&((*open))->next);
-	free_state((*open)->data);
-	free((*open));
+	t_heapp *tmp = NULL;
+
+	while ((*open)) {
+		tmp = (*open);
+		(*open) = (*open)->next;
+		free_state((tmp)->data);
+		free(tmp);
+	}
 }
 
 void	free_state(t_state *node)
