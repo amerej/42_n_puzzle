@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:57:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 02:31:24 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 16:34:19 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int				is_in_explored(int **board, t_list *explored)
 {
 	while(explored)
 	{
-		if(!memcmp(*board, *((int **)(explored->content)), 
+		if(!memcmp(*board, *((int **)(explored->content)),
 			g_size * g_size * sizeof(int)))
 			return(TRUE);
 		explored = explored->next;
@@ -24,15 +24,15 @@ int				is_in_explored(int **board, t_list *explored)
 	return(FALSE);
 }
 
-static void		path_push_back(t_state *root, t_state **child, t_position *path)
+static void		path_push_back(t_state *root, t_state *child, t_position *path)
 {
-	(*child)->paths_size = root->paths_size;
-	(*child)->paths = realloc((*child)->paths, 
-		sizeof(t_position) * ((*child)->paths_size + 1));
-	memcpy((*child)->paths, root->paths, 
-		sizeof(t_position) * ((*child)->paths_size));
-	(*child)->paths[(*child)->paths_size] = *path;
-	++(*child)->paths_size;
+	child->paths_size = root->paths_size;
+	child->paths = realloc(child->paths,
+		sizeof(t_position) * (child->paths_size + 1));
+	memcpy(child->paths, root->paths,
+		sizeof(t_position) * (child->paths_size));
+	child->paths[child->paths_size] = *path;
+	++child->paths_size;
 }
 
 t_state			*generate_move(t_state *state, t_position pos)
@@ -50,9 +50,9 @@ t_state			*generate_move(t_state *state, t_position pos)
 	n = state->board[state->empty.i + pos.i][state->empty.j + pos.j];
 	new_state->board[state->empty.i][state->empty.j] = n;
 	new_state->board[state->empty.i + pos.i][state->empty.j + pos.j] = 0;
-	new_state->empty = (t_position){state->empty.i + pos.i, 
+	new_state->empty = (t_position){state->empty.i + pos.i,
 		state->empty.j + pos.j};
-	path_push_back(state, &new_state, path);
+	path_push_back(state, new_state, path);
 	free(path);
 	return(new_state);
 }
@@ -78,7 +78,7 @@ void	print_paths(t_state *state)
 {
 	t_position	*p;
 	int			i;
-	
+
 	i = -1;
 	while(++i < state->paths_size)
 		printf("{%d,%d} ", state->paths[i].i, state->paths[i].j);

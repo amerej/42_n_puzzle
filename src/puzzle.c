@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:42:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/04/30 22:45:46 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 16:31:16 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ void				init_target(void)
 		if (!g.cur)
 			break;
 		g.cur++;
-		if(g.x + g.ix == g.s || g.x + g.ix < 0 || 
+		if(g.x + g.ix == g.s || g.x + g.ix < 0 ||
 			(g.ix != 0 && (*g_target)[g.x + g.ix + g.y * g.s] != -1))
 		{
 			g.iy = g.ix;
 			g.ix = 0;
 		}
-		else if(g.y + g.iy == g.s || g.y + g.iy < 0 || 
+		else if(g.y + g.iy == g.s || g.y + g.iy < 0 ||
 			(g.iy != 0 && (*g_target)[g.x + (g.y + g.iy) * g.s] != -1))
 		{
 			g.ix = -g.iy;
@@ -46,28 +46,28 @@ int					**init_grid(void)
 	int		i;
 	int		j;
 
-	if(!(grid = (int **)malloc(g_size * sizeof(int *))))
-		return(NULL);
-	if(!(grid[0] = (int *)malloc(g_size * g_size * sizeof(int))))
-		return(NULL);
+	if (!(grid = (int **)malloc(g_size * sizeof(int *))))
+		return (NULL);
+	if (!(grid[0] = (int *)malloc(g_size * g_size * sizeof(int))))
+		return (NULL);
 	i = -1;
-	while(++i < g_size)
+	while (++i < g_size)
 		grid[i] = (*grid + g_size * i);
 	i = -1;
-	while(++i < g_size)
+	while (++i < g_size)
 	{
 		j = -1;
-		while(++j < g_size)
+		while (++j < g_size)
 			grid[i][j] = -1;
 	}
-	return(grid);
+	return (grid);
 }
 
 t_state		*init_state(void)
 {
 	t_state		*state;
 
-	if(!(state = (t_state *)malloc(sizeof(*state))))
+	if (!(state = (t_state *)malloc(sizeof(*state))))
 	{
 		perror("State mem alloc");
 		return(NULL);
@@ -76,7 +76,7 @@ t_state		*init_state(void)
 	state->empty = (t_position){0, 0};
 	state->paths = NULL;
 	state->paths_size = 0;
-	return(state);
+	return (state);
 }
 
 t_state				*new_state()
@@ -87,16 +87,16 @@ t_state				*new_state()
 		return(destroy_state(state));
 	g_target = NULL;
 	g_size = 0;
-	return(state);
+	return (state);
 }
 
 void			*destroy_state(t_state *state)
 {
-	if((state->board))
+	if ((state->board))
 		ft_free_ptr((void **)&state->board);
-	if(g_target)
+	if (g_target)
 		ft_free_ptr((void **)&g_target);
-	if(state)
+	if (state)
 		ft_free_ptr((void **)&state);
-	return(NULL);
+	return (NULL);
 }

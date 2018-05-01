@@ -20,8 +20,8 @@ SRC_NAME= 	main.c \
 OBJ_NAME= $(SRC_NAME:.c=.o)
 
 #CFLAGS= -Werror -Wextra -Wall
-CFLAGS= -fsanitize=address -g
-LDFLAGS = -L$(LFT_PATH) -fsanitize=address -g
+CFLAGS= -g
+LDFLAGS = -L$(LFT_PATH) -g
 
 LDLIBS= -lm -lft
 

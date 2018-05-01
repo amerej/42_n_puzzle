@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 02:12:33 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 16:49:09 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int main(int argc, char *argv[])
 	greedy_search(state, manhattan_distance);
 	// printf("SOLUTION UNIFORM COST SEARCH\n\n");
 	// uniform_cost_search(state);
+	free(state);
 	return(0);
 }

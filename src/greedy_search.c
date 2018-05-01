@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 02:09:51 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 16:45:11 by gwojda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,20 @@ static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 	i = -1;
 	while(++i < 4)
 	{
-		if(successors[i] && !tb_explore(explored, successors[i]->board, 0, 0))
+		if (successors[i] && !tb_explore(explored, successors[i]->board, 0, 0))
 		{
 			tb_add(explored, successors[i]->board, 0, 0);
-			heapp_push(open, successors[i], greedy_cost(successors[i], 
-				heuristic(successors[i]->board, fn)), 
+			heapp_push(open, successors[i], greedy_cost(successors[i],
+				heuristic(successors[i]->board, fn)),
 				sizeof(t_state));
+			free(successors[i]);
 		}
-		else if(successors[i])
+		else if (successors[i])
 			free_state(successors[i]);
 	}
 }
 
-void			greedy_search(t_state *state, int(*fn)(int **board, int i, 
+void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 					int j))
 {
 	t_btree		*explored;
@@ -49,12 +50,12 @@ void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 	explored = NULL;
 	open = NULL;
 	tb_add(&explored, state->board, 0, 0);
-	heapp_push(&open, state, 
+	heapp_push(&open, state,
 		greedy_cost(state, heuristic(state->board, fn)), sizeof(t_state));
 	while(!heapp_is_empty(open))
 	{
 		node = heapp_pop(&open);
-		if(!memcmp((*node->board), *g_target, g_size * g_size * sizeof(int)))
+		if (!memcmp((*node->board), *g_target, g_size * g_size * sizeof(int)))
 		{
 			printf("SOLUTION:\n\n");
 			DEBUG_display_grid(node->board);
@@ -65,7 +66,7 @@ void			greedy_search(t_state *state, int(*fn)(int **board, int i,
 			printf("\n");
 			free_state(node);
 			free_explored(&explored);
-			if(open)
+			if (open)
 				free_open(&open);
 			return ;
 		}
