@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 22:55:44 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 23:57:05 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,34 @@ static int		get_board(t_state *state, char buffer[])
 	return (SUCCESS);
 }
 
-int				get_initial_state(t_state *state, char *filename)
+static int		read_file(t_state *state, FILE *fp)
 {
-	FILE		*fp;
 	char		*line;
 	size_t		len;
 	ssize_t		read;
 
 	line = NULL;
 	len = 0;
+
+	while ((read = getline(&line, &len, fp)) != -1)
+		if (!(get_board(state, line)))
+			return (ERROR);
+	if (line)
+		free(line);
+	return (SUCCESS);
+}
+
+int				get_initial_state(t_state *state, char *filename)
+{
+	FILE		*fp;
+
 	fp = fopen(filename, "r");
 	if (!fp)
 	{
 		perror("Opening file");
 		return (ERROR);
 	}
-	while ((read = getline(&line, &len, fp)) != -1)
-		if (!(get_board(state, line)))
-			return (ERROR);
-	if (line)
-		free(line);
+	read_file(state, fp);
 	if (!(g_target = init_grid()))
 	{
 		perror("Target mem alloc");
