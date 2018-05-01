@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 21:29:27 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 22:55:44 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int		get_board(t_state *state, char buffer[])
 	{
 		if ((g_size = strtol(buffer, &ptr, 10)) && !state->board)
 		{
-			if (g_size < 3 || g_size > 25)
+			if (g_size < 3 || g_size > 8)
 			{
 				ft_putstr_fd("Error: Bad size", 2);
 				return (ERROR);
