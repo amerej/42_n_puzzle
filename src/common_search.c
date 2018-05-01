@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 09:57:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 16:34:19 by gwojda           ###   ########.fr       */
+/*   Updated: 2018/05/01 21:33:33 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int				is_in_explored(int **board, t_list *explored)
 {
-	while(explored)
+	while (explored)
 	{
-		if(!memcmp(*board, *((int **)(explored->content)),
+		if (!memcmp(*board, *((int **)(explored->content)),
 			g_size * g_size * sizeof(int)))
-			return(TRUE);
+			return (TRUE);
 		explored = explored->next;
 	}
-	return(FALSE);
+	return (FALSE);
 }
 
 static void		path_push_back(t_state *root, t_state *child, t_position *path)
@@ -54,7 +54,7 @@ t_state			*generate_move(t_state *state, t_position pos)
 		state->empty.j + pos.j};
 	path_push_back(state, new_state, path);
 	free(path);
-	return(new_state);
+	return (new_state);
 }
 
 void			get_successors(t_state *state, t_state *successors[4])
@@ -63,24 +63,12 @@ void			get_successors(t_state *state, t_state *successors[4])
 	successors[1] = NULL;
 	successors[2] = NULL;
 	successors[3] = NULL;
-
-	if(state->empty.j - 1 >= 0)
+	if (state->empty.j - 1 >= 0)
 		successors[0] = generate_move(state, (t_position){0, -1});
-	if(state->empty.i - 1 >= 0)
+	if (state->empty.i - 1 >= 0)
 		successors[1] = generate_move(state, (t_position){-1, 0});
-	if(state->empty.i + 1 < g_size)
+	if (state->empty.i + 1 < g_size)
 		successors[2] = generate_move(state, (t_position){1, 0});
-	if(state->empty.j + 1 < g_size)
+	if (state->empty.j + 1 < g_size)
 		successors[3] = generate_move(state, (t_position){0, 1});
-}
-
-void	print_paths(t_state *state)
-{
-	t_position	*p;
-	int			i;
-
-	i = -1;
-	while(++i < state->paths_size)
-		printf("{%d,%d} ", state->paths[i].i, state->paths[i].j);
-	printf("\n");
 }

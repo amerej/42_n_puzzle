@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_btree.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/05/01 19:52:36 by aditsch           #+#    #+#             */
+/*   Updated: 2018/05/01 21:29:41 by aditsch          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/npuzzle.h"
 
-int		advance(int *y, int *x)
+static int		advance(int *y, int *x)
 {
 	if (*x + 1 != g_size)
 		*x += 1;
@@ -10,12 +22,12 @@ int		advance(int *y, int *x)
 		if (*y + 1 != g_size)
 			*y += 1;
 		else
-			return 1;
+			return (1);
 	}
-	return 0;
+	return (0);
 }
 
-void	tb_add(t_btree **list, int **board, int x, int y)
+void			tb_add(t_btree **list, int **board, int x, int y)
 {
 	if (!(*list))
 	{
@@ -28,7 +40,7 @@ void	tb_add(t_btree **list, int **board, int x, int y)
 		if (((*list)->took = advance(&y, &x)))
 			return ;
 		board[y][x] > (*list)->value ? tb_add(&(*list)->right, board, x, y) :
-		   	tb_add(&(*list)->left, board, x, y);
+			tb_add(&(*list)->left, board, x, y);
 	}
 	else if ((*list)->value == board[y][x])
 	{
@@ -46,7 +58,7 @@ void	tb_add(t_btree **list, int **board, int x, int y)
 int				tb_explore(t_btree **explored, int **board, int x, int y)
 {
 	if (!(*explored))
-		return FALSE;
+		return (ERROR);
 	else if ((*explored)->value == board[y][x])
 	{
 		if (x + 1 != g_size)
@@ -57,14 +69,14 @@ int				tb_explore(t_btree **explored, int **board, int x, int y)
 			if (y + 1 != g_size)
 				y += 1;
 			else
-				return (*explored)->took;
+				return ((*explored)->took);
 		}
 		if (board[y][x] > (*explored)->value)
-			return tb_explore(&(*explored)->right, board, x, y);
+			return (tb_explore(&(*explored)->right, board, x, y));
 		else
-			return tb_explore(&(*explored)->left, board, x, y);
+			return (tb_explore(&(*explored)->left, board, x, y));
 	}
 	else if ((*explored)->value != board[y][x])
-		return tb_explore(&(*explored)->next, board, x, y);
-	return (455523);
+		return (tb_explore(&(*explored)->next, board, x, y));
+	return (SUCCESS);
 }

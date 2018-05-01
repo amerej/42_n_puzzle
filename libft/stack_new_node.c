@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 18:42:15 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 19:40:06 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 18:42:01 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ t_stack		*stack_new_node(void const *data, size_t data_size)
 {
 	t_stack		*node;
 
-	if(!(node = ft_memalloc(sizeof(t_stack))))
-		return(NULL);
-	if(data)
+	if (!(node = ft_memalloc(sizeof(t_stack))))
+		return (NULL);
+	if (data)
 	{
 		node->data = ft_memalloc(data_size);
 		node->data_size = data_size;
@@ -30,5 +30,5 @@ t_stack		*stack_new_node(void const *data, size_t data_size)
 		node->data_size = 0;
 	}
 	node->next = NULL;
-	return(node);
+	return (node);
 }

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 01:55:22 by aditsch           #+#    #+#             */
-/*   Updated: 2018/04/20 16:46:59 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 18:29:04 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				get_next_line(int const fd, char **line)
 
 	if (!line || fd < 0)
 		return (-1);
-	if(*line)
+	if (*line)
 		*line = NULL;
 	*line = ft_strdup("");
 	if (ft_read_tmp(line, &buff_tmp))

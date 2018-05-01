@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 18:43:15 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 19:35:57 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 18:42:10 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int		stack_is_empty(t_stack *head)
 {
-	return !head;
+	return (!head);
 }

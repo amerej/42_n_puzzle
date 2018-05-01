@@ -1,39 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 06:54:10 by aditsch           #+#    #+#             */
-/*   Updated: 2018/04/30 23:09:34 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 21:32:42 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
 
-void	DEBUG_display_grid(int **grid) {
-	
-	for (int i = 0; i < g_size; i++) {
-		for (int j = 0; j < g_size; j++) {
+void		display_grid(int **grid)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (++i < g_size)
+	{
+		j = -1;
+		while (++j < g_size)
+		{
 			printf("%3d ", grid[i][j]);
 		}
 		printf("\n");
 	}
 }
 
-void	DEBUG_display_initial_state(int **board) {
-	
-	printf("\nPUZZLE INFORMATIONS\n\n");	
+void		display_initial_state(int **board)
+{
+	printf("\nPUZZLE INFORMATIONS\n\n");
 	printf("Initial State\n");
-	DEBUG_display_grid(board);
+	display_grid(board);
 	printf("\nGoal State\n");
-	DEBUG_display_grid(g_target);
+	display_grid(g_target);
 	printf("\n");
 }
 
-void	DEBUG_heuristics(int **board) {
-	
+void		display_heuristics(int **board)
+{
 	printf("HEURISTICS\n\n");
 	printf("Hamming: %d\n", heuristic(board, hamming_distance));
 	printf("Manhattan: %d\n", heuristic(board, manhattan_distance));
@@ -41,12 +48,12 @@ void	DEBUG_heuristics(int **board) {
 	printf("\n");
 }
 
-void	printList(t_list *n)
+void		display_paths(t_state *state)
 {
-	while (n != NULL)
-	{
-		DEBUG_display_grid(n->content);
-		printf("\n");
-		n = n->next;
-	}
+	int		i;
+
+	i = -1;
+	while (++i < state->paths_size)
+		printf("{%d,%d} ", state->paths[i].i, state->paths[i].j);
+	printf("\n");
 }

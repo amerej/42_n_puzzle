@@ -6,11 +6,11 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 03:08:18 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 16:44:17 by gwojda           ###   ########.fr       */
+/*   Updated: 2018/05/01 21:28:29 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../inc/npuzzle.h"
+#include "../inc/npuzzle.h"
 
 int		check_arguments(int argc)
 {
@@ -36,9 +36,11 @@ void	free_explored(t_btree **explored)
 
 void	free_open(t_heapp **open)
 {
-	t_heapp *tmp = NULL;
+	t_heapp		*tmp;
 
-	while ((*open)) {
+	tmp = NULL;
+	while ((*open))
+	{
 		tmp = (*open);
 		(*open) = (*open)->next;
 		free_state((tmp)->data);

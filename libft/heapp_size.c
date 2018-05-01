@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/25 16:24:23 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/25 16:25:45 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 18:29:20 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int		heapp_size(t_heapp *head)
 	int		count;
 
 	count = 0;
-	while(head)
+	while (head)
 	{
 		count++;
 		head = head->next;
 	}
-	return(count);
+	return (count);
 }

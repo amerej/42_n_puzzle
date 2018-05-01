@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 22:04:55 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/19 22:05:04 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 18:30:09 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int		heapp_is_empty(t_heapp *head)
 {
-	return !head;
+	return (!head);
 }

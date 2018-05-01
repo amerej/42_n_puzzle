@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 18:43:26 by aditsch           #+#    #+#             */
-/*   Updated: 2018/03/22 00:33:04 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 18:42:19 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int		stack_push(t_stack **head, void const *data, size_t data_size)
 {
 	t_stack		*node;
 
-	if(!(node = stack_new_node(data, data_size)))
-		return(ERROR);
+	if (!(node = stack_new_node(data, data_size)))
+		return (ERROR);
 	node->next = *head;
 	*head = node;
-	return(SUCCESS);
+	return (SUCCESS);
 }

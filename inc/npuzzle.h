@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/04/30 23:03:42 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 19:50:22 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct		s_btree
 	struct s_btree	*left;
 	struct s_btree	*right;
 	struct s_btree	*next;
-	int 			value;
+	int				value;
 	int				took;
 }					t_btree;
 
@@ -36,14 +36,12 @@ typedef struct		s_state
 	t_position		*paths;
 }					t_state;
 
-extern int 			**g_target;
-extern int 			g_size;
+extern int			**g_target;
+extern int			g_size;
 
-////////////////
 int					tb_explore(t_btree **explored, int **board, int x, int y);
 void				tb_add(t_btree **explored, int **board, int x, int y);
 
-////////////////
 int					check_arguments(int argc);
 
 int					hamming_distance(int **board, int i, int j);
@@ -63,9 +61,9 @@ t_state				*generate_move(t_state *state, t_position pos);
 void				get_successors(t_state *state, t_state *successors[4]);
 int					is_in_explored(int **board, t_list *explored);
 
-void				a_star_search(t_state *state, int(*fn)(int **board, int i, 
+void				a_star_search(t_state *state, int(*fn)(int **board, int i,
 						int j));
-void				greedy_search(t_state *state, int(*fn)(int **board, int i, 
+void				greedy_search(t_state *state, int(*fn)(int **board, int i,
 						int j));
 void				uniform_cost_search(t_state *state);
 
@@ -73,20 +71,8 @@ void				free_explored(t_btree **explored);
 void				free_open(t_heapp **open);
 void				free_state(t_state *node);
 
-
-
-
-// DEBUG A VIRER
-typedef struct		s_node_test
-{
-	int				x;
-	int				y;
-}					t_node_test;
-
-void DEBUG_display_grid(int **grid);
-void DEBUG_display_initial_state(int **board);
-void DEBUG_heuristics(int **board);
-void DEBUG_stack();
-void DEBUG_heapp();
-void printList(t_list *n);
+void				display_grid(int **grid);
+void				display_initial_state(int **board);
+void				display_heuristics(int **board);
+void				display_paths(t_state *state);
 #endif

@@ -15,12 +15,11 @@ SRC_NAME= 	main.c \
 			greedy_search.c \
 			uniform_cost_search.c \
 			t_btree.c \
-			debug.c
+			display.c
 
 OBJ_NAME= $(SRC_NAME:.c=.o)
 
-#CFLAGS= -Werror -Wextra -Wall
-CFLAGS= -g
+CFLAGS= -Werror -Wextra -Wall -g
 LDFLAGS = -L$(LFT_PATH) -g
 
 LDLIBS= -lm -lft

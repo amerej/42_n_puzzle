@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 16:49:09 by gwojda           ###   ########.fr       */
+/*   Updated: 2018/05/01 22:08:06 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		**g_target;
 int		g_size;
 
-int main(int argc, char *argv[])
+int		main(int argc, char *argv[])
 {
 	t_state		*state;
 
@@ -27,17 +27,12 @@ int main(int argc, char *argv[])
 	if (!(get_initial_state(state, argv[1])))
 		return (-1);
 	init_target();
-
 	// TEST DEBUG
-	DEBUG_display_initial_state(state->board);
-
-	// DEBUG_heuristics(state->board);
-	// printf("SOLUTION A* SEARCH\n\n");
+	display_initial_state(state->board);
+	// display_heuristics(state->board);
 	// a_star_search(state, manhattan_distance);
-	printf("SOLUTION GREEDY SEARCH\n\n");
-	greedy_search(state, manhattan_distance);
-	// printf("SOLUTION UNIFORM COST SEARCH\n\n");
-	// uniform_cost_search(state);
+	// greedy_search(state, manhattan_distance);
+	uniform_cost_search(state);
 	free(state);
-	return(0);
+	return (0);
 }

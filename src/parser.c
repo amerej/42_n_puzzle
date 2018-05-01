@@ -6,13 +6,13 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/04/30 22:45:52 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 21:29:27 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
 
-static void			init_board(t_state *state, char buffer[], int i)
+static void		init_board(t_state *state, char buffer[], int i)
 {
 	char		*end;
 	char		*ptr;
@@ -21,12 +21,12 @@ static void			init_board(t_state *state, char buffer[], int i)
 
 	j = 0;
 	ptr = buffer;
-	while(ptr < buffer + BUFFER_SIZE)
+	while (ptr < buffer + BUFFER_SIZE)
 	{
 		tmp = (int)strtol(ptr, &end, 10);
 		if (tmp == 0 && end == ptr)
-			break;
-		if(tmp == 0)
+			break ;
+		if (tmp == 0)
 			state->empty = (t_position){i, j};
 		state->board[i][j] = tmp;
 		ptr = end;
@@ -34,7 +34,7 @@ static void			init_board(t_state *state, char buffer[], int i)
 	}
 }
 
-static int			get_board(t_state *state, char buffer[])
+static int		get_board(t_state *state, char buffer[])
 {
 	char			*ptr;
 	static int		i = 0;
@@ -43,15 +43,15 @@ static int			get_board(t_state *state, char buffer[])
 	{
 		if ((g_size = strtol(buffer, &ptr, 10)) && !state->board)
 		{
-			if(g_size < 3 || g_size > 25)
+			if (g_size < 3 || g_size > 25)
 			{
 				ft_putstr_fd("Error: Bad size", 2);
-				return(ERROR);
+				return (ERROR);
 			}
-			if(!(state->board = init_grid()))
+			if (!(state->board = init_grid()))
 			{
 				perror("Board mem alloc");
-				return(ERROR);
+				return (ERROR);
 			}
 		}
 	}
@@ -69,22 +69,21 @@ int				get_initial_state(t_state *state, char *filename)
 
 	line = NULL;
 	len = 0;
-
 	fp = fopen(filename, "r");
-	if(!fp)
+	if (!fp)
 	{
 		perror("Opening file");
 		return (ERROR);
 	}
-	while((read = getline(&line, &len, fp)) != -1)
+	while ((read = getline(&line, &len, fp)) != -1)
 		if (!(get_board(state, line)))
 			return (ERROR);
-	if(line)
+	if (line)
 		free(line);
-	if(!(g_target = init_grid()))
+	if (!(g_target = init_grid()))
 	{
 		perror("Target mem alloc");
-		return(ERROR);
+		return (ERROR);
 	}
-	return(SUCCESS);
+	return (SUCCESS);
 }
