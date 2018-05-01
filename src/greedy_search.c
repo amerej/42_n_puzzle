@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 01:23:46 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/01 02:09:51 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,8 @@ static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 				heuristic(successors[i]->board, fn)), 
 				sizeof(t_state));
 		}
-		else if (successors[i])
-		{
-			free(successors[i]->paths);
-			free(successors[i]->board[0]);
-			free(successors[i]->board);
-			free(successors[i]);
-		}
+		else if(successors[i])
+			free_state(successors[i]);
 	}
 }
 
