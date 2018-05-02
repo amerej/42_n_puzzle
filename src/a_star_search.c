@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 22:01:06 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/02 23:09:11 by nrouzeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 void			a_star_search(t_state *state,
 					int (*fn) (int **board, int i, int j))
 {
+	printf("IN ATAR\n");
 	t_btree		*explored;
 	t_heapp		*open;
 	t_state		*node;

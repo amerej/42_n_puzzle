@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/02 01:01:18 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/02 23:03:12 by nrouzeva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		main(int argc, char *argv[])
 	state = NULL;
 	if (!(check_arguments(argc)))
 		return (-1);
-	if (!command_line_parser(argc, argv))
+	if (command_line_parser(state, argc, argv) == -1)
 	{
 		show_usage();
 		return (-1);
