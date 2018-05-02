@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 22:31:32 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/02 22:58:32 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,16 @@ int		main(int argc, char *argv[])
 	if (!(state = new_state()))
 		return (-1);
 	if (!(get_initial_state(state, argv[1])))
-		return (-1);
-	init_target();
+	{
+		destroy_state(state);
+		return (-1);	
+	}
+	// init_target();
 	// TEST DEBUG
-	display_initial_state(state->board);
+	// display_initial_state(state->board);
 	// display_heuristics(state->board);
 	// a_star_search(state, manhattan_distance);
-	greedy_search(state, manhattan_distance);
+	// greedy_search(state, manhattan_distance);
 	// uniform_cost_search(state);
 	free(state);
 	free(g_target[0]);

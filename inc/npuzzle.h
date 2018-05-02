@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 19:50:22 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/02 17:09:29 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 # include "../libft/libft.h"
 # include "utils.h"
 
-# define N_MAX 25
-# define BUFFER_SIZE (((3 * N_MAX) + (1 * (N_MAX - 1))) + 1)
+# define N 8
+# define N_MAX ((N * N) - 1)
+# define BUFFER_SIZE (((3 * N) + (1 * (N - 1))) + 1)
 
 typedef struct		s_btree
 {
@@ -75,4 +76,6 @@ void				display_grid(int **grid);
 void				display_initial_state(int **board);
 void				display_heuristics(int **board);
 void				display_paths(t_state *state);
+
+int					read_puzzle(t_state *state, FILE *fp);
 #endif

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:42:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 22:32:37 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/02 23:13:58 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,12 @@ t_state		*new_state(void)
 
 void		*destroy_state(t_state *state)
 {
-	if ((state->board))
+	if (state->board[0])
+		ft_free_ptr((void **)&state->board[0]);
+	if (state->board)
 		ft_free_ptr((void **)&state->board);
+	if (state->paths)
+		ft_free_ptr((void **)&state->paths);
 	if (g_target)
 		ft_free_ptr((void **)&g_target);
 	if (state)

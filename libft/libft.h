@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/11 01:29:29 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 19:17:11 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/02 17:04:39 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <string.h>
 # include <errno.h>
 # include <math.h>
+# include <ctype.h>
 # include "get_next_line.h"
 # include "data_structures.h"
 
