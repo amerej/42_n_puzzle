@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/02 23:03:12 by nrouzeva         ###   ########.fr       */
+/*   Updated: 2018/05/02 23:44:24 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		g_size;
 
 void	show_usage(void)
 {
-	printf("usage : npuzzle [file ...] [-gready -astar -uniform] [-m -e -h]\n");
+	printf("usage : npuzzle [file ...] [-greedy -astar -uniform] [-m -e -h]\n");
 }
 
 int		main(int argc, char *argv[])
