@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/02 23:41:45 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/03 00:21:45 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void			free_split(char **split)
 	i = -1;
 	while (split[++i])
 	{
+		printf("free %s\n", split[i]);
 		free(split[i]);
 	}
 	free(split);
@@ -101,7 +102,7 @@ static int		init_board(t_state *state, char **split)
 		state->board[i][j] = atoi(split[j]);
 	}
 	i++;
-	return (SUCCESS);
+	return (i);
 }
 
 static int		get_board(t_state *state, char **split)
@@ -129,6 +130,20 @@ static int		get_board(t_state *state, char **split)
 	return (SUCCESS);
 }
 
+int				get_split(t_state *state, char *line)
+{
+	char		**split;
+	
+	split = ft_strsplit(line, ' ');
+	if (!get_board(state, split))
+	{
+		free_split(split);
+		return (ERROR);
+	}
+	free_split(split);
+	return (SUCCESS);
+}
+
 int				get_initial_state(t_state *state, char *filename)
 {
 	FILE		*fp;
@@ -153,7 +168,6 @@ int			read_puzzle(t_state *state, FILE *fp)
 	char		*line;
 	size_t		len;
 	ssize_t		read;
-	char		**split;
 
 	line = NULL;
 	len = 0;
@@ -161,13 +175,11 @@ int			read_puzzle(t_state *state, FILE *fp)
 	{
 		if (line[0] == '#')
 			continue;
-		split = ft_strsplit(line, ' ');
-		if (!(get_board(state, split)))
+		if (!get_split(state, line))
 		{
-			free_split(split);
+			free(line);
 			return (ERROR);
 		}
-		free_split(split);
 	}
 	if (line)
 		free(line);
