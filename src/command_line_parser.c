@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:28:19 by nrouzeva          #+#    #+#             */
-/*   Updated: 2018/05/03 03:28:39 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/03 04:31:43 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		command_line_parser(t_state *state, int argc, char **argv)
 		uniform_cost_search(state);
 	else if (argc == 4 && !strcmp(argv[2], "-greedy"))
 		greedy_search(state, f);
-	else 
+	else
 		return (-1);
 	return (1);
 }
