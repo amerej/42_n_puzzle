@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/03 03:29:38 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 01:25:16 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,23 @@
 int		**g_target;
 int		g_size;
 
-void	show_usage(void)
-{
-	printf("usage : npuzzle [file ...] [-greedy -astar -uniform] [-m -e -h]\n");
-}
-
 int		main(int argc, char *argv[])
 {
 	t_state		*state;
+	t_argv		user_argv;
 
 	state = NULL;
-	if (!(check_arguments(argc)))
-		return (-1);
-	if (command_line_parser(state, argc, argv) == -1)
+	user_argv = parse_argv(argc, argv);
+	if (user_argv.err_code)
 	{
-		show_usage();
-		return (-1);
+		argv_err(user_argv.err_code);
+		return (EXIT_FAILURE);
 	}
+	if (!(state = new_state()))
+		return (EXIT_FAILURE);
+	if (!(get_initial_state(state, argv[1])))
+		return (EXIT_FAILURE);
+	init_target();
+	user_argv.search(state, user_argv.heuristic);
 	return (0);
 }

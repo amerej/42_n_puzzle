@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/03 03:29:41 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 00:29:17 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				get_board(t_state *state, char **split)
 			g_size = size;
 		else
 		{
-			ft_putstr_fd("Error: Bad size", 2);
+			ft_putstr_fd("Error: Bad size\n", 2);
 			return (ERROR);
 		}
 		if (!(state->board = init_grid()))
@@ -63,15 +63,25 @@ int				get_board(t_state *state, char **split)
 
 int				get_initial_state(t_state *state, char *filename)
 {
-	FILE		*fp;
+	FILE			*fp;
+	int				fd;
+	char			c;
+	struct stat		info;
 
-	fp = fopen(filename, "r");
-	if (!fp)
+	if (stat(filename, &info) == -1)
+		return (ERROR);
+	if (!S_ISREG(info.st_mode))
+	{
+		printf("Invalid file\n");
+		return (ERROR);
+	}
+	if ((fp = fopen(filename, "r")) == NULL)
 	{
 		perror("Opening file");
 		return (ERROR);
 	}
-	read_puzzle(state, fp);
+	if (!read_puzzle(state, fp))
+		return (ERROR);
 	if (!(g_target = init_grid()))
 	{
 		perror("Target mem alloc");
@@ -101,9 +111,7 @@ int				read_lines(t_state *state, FILE *fp)
 			return (ERROR);
 		}
 		else
-		{
 			nb_line++;
-		}
 	}
 	if (line)
 		free(line);
@@ -112,13 +120,8 @@ int				read_lines(t_state *state, FILE *fp)
 
 int				read_puzzle(t_state *state, FILE *fp)
 {
-	char		*line;
-	size_t		len;
-	ssize_t		read;
 	int			nb_line;
 
-	line = NULL;
-	len = 0;
 	if (!(nb_line = read_lines(state, fp)))
 		return (ERROR);
 	if (nb_line != g_size)

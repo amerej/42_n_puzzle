@@ -6,38 +6,63 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:28:19 by nrouzeva          #+#    #+#             */
-/*   Updated: 2018/05/03 04:31:43 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 01:27:54 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
 
-int		command_line_parser(t_state *state, int argc, char **argv)
+t_heuristic		get_heuristic(int argc, char *argv[])
 {
-	int (*f)(int **, int , int);
-
-	if (!(state = new_state()))
-		return (-1);
-	if (!(get_initial_state(state, argv[1])))
-		return (-1);
-	init_target();
-	if (argc == 3 && strcmp(argv[2], "-uniform"))
-		return (-1);
 	if (argc == 4 && !strcmp(argv[3], "-m"))
-		f = &manhattan_distance;
+		return (manhattan_distance);
 	else if (argc == 4 && !strcmp(argv[3], "-h"))
-		f = &hamming_distance;
+		return (hamming_distance);
 	else if (argc == 4 && !strcmp(argv[3], "-e"))
-		f = &euclidean_distance;
-	else if (argc == 4)
-		return (-1);
+		return (euclidean_distance);
+	return (NULL);
+}
+
+t_search		get_search(int argc, char *argv[])
+{
 	if (argc == 4 && !strcmp(argv[2], "-astar"))
-		a_star_search(state, f);
+		return (a_star_search);
 	else if (argc == 3 && !strcmp(argv[2], "-uniform"))
-		uniform_cost_search(state);
+		return (uniform_cost_search);
 	else if (argc == 4 && !strcmp(argv[2], "-greedy"))
-		greedy_search(state, f);
-	else
-		return (-1);
-	return (1);
+		return (greedy_search);
+	return (NULL);
+}
+
+t_argv			parse_argv(int argc, char **argv)
+{
+	t_argv		res;
+
+	res.heuristic = NULL;
+	res.search = NULL;
+	res.err_code = 0;
+	if (argc < 3 || argc > 4)
+		res.err_code = 1;
+	else if (argc == 3 && strcmp(argv[2], "-uniform"))
+		res.err_code = 2;
+	else if (!(res.heuristic = get_heuristic(argc, argv)))
+		res.err_code = 3;
+	else if (!(res.search = get_search(argc, argv)))
+		res.err_code = 4;
+	return (res);
+}
+
+void			argv_err(int err_code)
+{
+
+	if (err_code == 1)
+		printf("err_code [1]: Invalid number of arguments\n");
+	if (err_code == 2)
+		printf("err_code [2]: Invalid number of arguments with -uniform\n");
+	if (err_code == 3)
+		printf("err_code [3]: Invalid Heuristic\n");
+	if (err_code == 4)
+		printf("err_code [4]: Invalid Search Algorithm\n");
+	printf("Usage : npuzzle [file ...] \
+	[-greedy [-m -e -h] -astar [-m -e -h] -uniform]\n");
 }

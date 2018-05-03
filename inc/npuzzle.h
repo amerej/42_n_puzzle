@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/03 03:08:01 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 01:23:35 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,15 @@
 
 # include "../libft/libft.h"
 # include "utils.h"
+# include <sys/types.h>
+# include <sys/stat.h>
 
 # define N 8
 # define N_MAX ((N * N) - 1)
 # define BUFFER_SIZE (((3 * N) + (1 * (N - 1))) + 1)
+
+extern int			**g_target;
+extern int			g_size;
 
 typedef struct		s_btree
 {
@@ -37,13 +42,18 @@ typedef struct		s_state
 	t_position		*paths;
 }					t_state;
 
-extern int			**g_target;
-extern int			g_size;
+typedef int			(*t_heuristic)(int **board, int i, int j);
+typedef void		(*t_search)(t_state *state, t_heuristic);
+
+typedef struct		s_argv
+{
+	t_heuristic		heuristic;
+	t_search		search;
+	int				err_code;
+}					t_argv;
 
 int					tb_explore(t_btree **explored, int **board, int x, int y);
 void				tb_add(t_btree **explored, int **board, int x, int y);
-
-int					check_arguments(int argc);
 
 int					hamming_distance(int **board, int i, int j);
 int					manhattan_distance(int **board, int i, int j);
@@ -87,4 +97,9 @@ int					check_duplicate(int **board);
 int					is_number(char *str);
 void				free_split(char **split);
 int					get_split(t_state *state, char *line);
+
+t_heuristic			get_heuristic(int argc, char *argv[]);
+t_search			get_search(int argc, char *argv[]);
+t_argv				parse_argv(int argc, char **argv);
+void				argv_err(int err_code);
 #endif
