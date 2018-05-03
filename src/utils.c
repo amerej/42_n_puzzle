@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 03:08:18 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/02 16:50:18 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/03 03:29:46 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		check_arguments(int argc)
 {
-	if (argc != 2)
+	if (argc < 3 || argc > 4)
 	{
 		printf("error : invalid number of arguments\n");
 		return (ERROR);
