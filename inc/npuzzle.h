@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/02 17:09:29 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/03 03:08:01 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int					**init_grid();
 void				init_target();
 t_state				*init_state(void);
 t_state				*new_state(void);
-int					get_initial_state(t_state *state, char *filename);
 void				*destroy_state(t_state *state);
 
 void				print_paths(t_state *state);
@@ -77,5 +76,15 @@ void				display_initial_state(int **board);
 void				display_heuristics(int **board);
 void				display_paths(t_state *state);
 
+int					init_board(t_state *state, char **split);
+int					get_board(t_state *state, char **split);
+int					get_initial_state(t_state *state, char *filename);
+int					read_lines(t_state *state, FILE *fp);
 int					read_puzzle(t_state *state, FILE *fp);
+
+int					ft_count_split(char **split);
+int					check_duplicate(int **board);
+int					is_number(char *str);
+void				free_split(char **split);
+int					get_split(t_state *state, char *line);
 #endif

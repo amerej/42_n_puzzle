@@ -8,6 +8,7 @@ LFT_PATH = ./libft/
 SRC_NAME= 	main.c \
 			utils.c \
 			parser.c \
+			parser_utils.c \
 			heuristic.c \
 			puzzle.c \
 			common_search.c \
