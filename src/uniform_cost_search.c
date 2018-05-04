@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 06:27:48 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 06:38:54 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void			uniform_cost_search(t_state *state, t_heuristic h)
 		free_state(s.node);
 	}
 	free_explored(&s.explored);
-	if (s.open)
-		free_open(&s.open);
+	free_open(&s.open);
+	printf("\nNO SOLUTION\n\n");
 	return ;
 }
