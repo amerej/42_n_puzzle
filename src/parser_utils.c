@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/03 21:53:04 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 03:10:47 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int		ft_count_split(char **split)
 	int	i;
 
 	i = -1;
-	while (split[++i]) ;
-	return i;
+	while (split[++i])
+		;
+	return (i);
 }
 
 int		check_duplicate(int **board)
@@ -53,13 +54,9 @@ int		is_number(char *str)
 
 	i = -1;
 	len = strlen(str);
-	while(++i < len - 1)
-	{
-		if(!isdigit(str[i]))
-		{
+	while (++i < len - 1)
+		if (!isdigit(str[i]))
 			return (0);
-		}
-	}
 	return (1);
 }
 
@@ -78,7 +75,7 @@ void	free_split(char **split)
 int		get_split(t_state *state, char *line)
 {
 	char		**split;
-	
+
 	split = ft_strsplit(line, ' ');
 	if (!get_board(state, split))
 	{

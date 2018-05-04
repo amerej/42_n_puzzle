@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/02 23:09:02 by nrouzeva         ###   ########.fr       */
+/*   Updated: 2018/05/04 03:49:34 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,41 +39,28 @@ static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 
 void			uniform_cost_search(t_state *state)
 {
-	printf("IN uniform\n");
-	t_btree		*explored;
-	t_heapp		*open;
-	t_state		*node;
-	t_state		*successors[4];
+	t_search_var	s;
 
-	explored = NULL;
-	open = NULL;
-	tb_add(&explored, state->board, 0, 0);
-	heapp_push(&open, state, uniform_cost(state), sizeof(t_state));
-	while (!heapp_is_empty(open))
+	display_initial_state(state->board, "UNIFORM COST SEARCH");
+	s = (t_search_var) {NULL, NULL, NULL, {NULL, NULL, NULL, NULL}, 0, 1};
+	tb_add(&s.explored, state->board, 0, 0);
+	heapp_push(&s.open, state, uniform_cost(state), sizeof(t_state));
+	while (!heapp_is_empty(s.open))
 	{
-		node = heapp_pop(&open);
-		if (!memcmp((*node->board), *g_target, g_size * g_size * sizeof(int)))
+		s.node = heapp_pop(&s.open);
+		s.t_cmplx += 1;
+		if (!memcmp((*s.node->board), *g_target, g_size * g_size * sizeof(int)))
 		{
-			printf("SOLUTION UNIFORM COST SEARCH\n\n");
-			display_grid(node->board);
-			printf("\n");
-			printf("OPEN LIST: %d\n\n", heapp_size(open));
-			// printf("CLOSED LIST: %d\n\n", ft_list_size(explored));
-			printf("PATHS:\n\n");
-			display_paths(node);
-			printf("\n");
-			free_state(node);
-			free_explored(&explored);
-			if (open)
-				free_open(&open);
+			display_solution(s);
 			return ;
 		}
-		get_successors(node, successors);
-		add_to_open_heapp(successors, &open, &explored);
-		free_state(node);
+		get_successors(s.node, s.successors);
+		s.s_cmplx += count_successors(s.successors);
+		add_to_open_heapp(s.successors, &s.open, &s.explored);
+		free_state(s.node);
 	}
-	free_explored(&explored);
-	if (open)
-		free_open(&open);
+	free_explored(&s.explored);
+	if (s.open)
+		free_open(&s.open);
 	return ;
 }

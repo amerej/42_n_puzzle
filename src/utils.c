@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 03:08:18 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 01:17:29 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 03:14:24 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,17 @@ void	free_state(t_state *node)
 	free(node->board[0]);
 	free(node->board);
 	free(node);
+}
+
+int		count_successors(t_state *successors[4])
+{
+	int		count;
+	int		i;
+
+	count = 0;
+	i = -1;
+	while (++i < 4)
+		if (successors[i])
+			count++;
+	return (count);
 }

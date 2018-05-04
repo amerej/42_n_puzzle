@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 01:42:37 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/02 23:13:58 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 03:06:27 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,10 @@ t_state		*new_state(void)
 	t_state		*state;
 
 	if (!(state = init_state()))
-		return (destroy_state(state));
+	{
+		destroy_state(state);
+		return (NULL);
+	}
 	g_target = NULL;
 	g_size = 0;
 	return (state);

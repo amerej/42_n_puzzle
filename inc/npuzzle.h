@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 01:23:35 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 03:40:11 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,16 @@ typedef struct		s_state
 	t_position		empty;
 	t_position		*paths;
 }					t_state;
+
+typedef struct		s_search_var
+{
+	t_btree			*explored;
+	t_heapp			*open;
+	t_state			*node;
+	t_state			*successors[4];
+	int				t_cmplx;
+	int				s_cmplx;
+}					t_search_var;
 
 typedef int			(*t_heuristic)(int **board, int i, int j);
 typedef void		(*t_search)(t_state *state, t_heuristic);
@@ -82,9 +92,10 @@ void				free_open(t_heapp **open);
 void				free_state(t_state *node);
 
 void				display_grid(int **grid);
-void				display_initial_state(int **board);
+void				display_initial_state(int **board, char *algo);
 void				display_heuristics(int **board);
 void				display_paths(t_state *state);
+void				display_solution(t_search_var s);
 
 int					init_board(t_state *state, char **split);
 int					get_board(t_state *state, char **split);
@@ -102,4 +113,6 @@ t_heuristic			get_heuristic(int argc, char *argv[]);
 t_search			get_search(int argc, char *argv[]);
 t_argv				parse_argv(int argc, char **argv);
 void				argv_err(int err_code);
+
+int					count_successors(t_state *successors[4]);
 #endif

@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 23:28:19 by nrouzeva          #+#    #+#             */
-/*   Updated: 2018/05/04 01:27:54 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 03:13:14 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,19 @@ t_argv			parse_argv(int argc, char **argv)
 	if (argc < 3 || argc > 4)
 		res.err_code = 1;
 	else if (argc == 3 && strcmp(argv[2], "-uniform"))
-		res.err_code = 2;
-	else if (!(res.heuristic = get_heuristic(argc, argv)))
-		res.err_code = 3;
+		res.err_code = 1;
+	else if (!(res.heuristic = get_heuristic(argc, argv)) &&
+		!(argc == 3 && !strcmp(argv[2], "-uniform")))
+		res.err_code = 1;
 	else if (!(res.search = get_search(argc, argv)))
-		res.err_code = 4;
+		res.err_code = 1;
 	return (res);
 }
 
 void			argv_err(int err_code)
 {
-
 	if (err_code == 1)
-		printf("err_code [1]: Invalid number of arguments\n");
-	if (err_code == 2)
-		printf("err_code [2]: Invalid number of arguments with -uniform\n");
-	if (err_code == 3)
-		printf("err_code [3]: Invalid Heuristic\n");
-	if (err_code == 4)
-		printf("err_code [4]: Invalid Search Algorithm\n");
+		printf("err_code [1]: Invalid arguments\n");
 	printf("Usage : npuzzle [file ...] \
-	[-greedy [-m -e -h] -astar [-m -e -h] -uniform]\n");
+[-greedy [-m -e -h] -astar [-m -e -h] -uniform]\n");
 }

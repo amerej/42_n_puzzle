@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 01:25:16 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 03:37:38 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ int		main(int argc, char *argv[])
 	if (!(state = new_state()))
 		return (EXIT_FAILURE);
 	if (!(get_initial_state(state, argv[1])))
+	{
+		destroy_state(state);
 		return (EXIT_FAILURE);
+	}
 	init_target();
 	user_argv.search(state, user_argv.heuristic);
 	return (0);

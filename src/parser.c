@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 00:29:17 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 03:01:37 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,5 @@ int				read_puzzle(t_state *state, FILE *fp)
 		printf("Duplicate found\n");
 		return (ERROR);
 	}
-	display_grid(state->board);
 	return (SUCCESS);
 }
