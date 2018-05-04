@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 05:46:56 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 19:11:47 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int		main(int argc, char *argv[])
 	}
 	init_target();
 	user_argv.search(state, user_argv.heuristic);
+	free(state);
 	return (0);
 }
