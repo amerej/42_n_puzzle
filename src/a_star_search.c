@@ -6,16 +6,11 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 03:49:06 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 03:57:52 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
-
-static int		a_star_cost(t_state *node, int distance)
-{
-	return (node->paths_size + distance);
-}
 
 static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 					t_btree **explored, int (*fn) (int **board, int i, int j))

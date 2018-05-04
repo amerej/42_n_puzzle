@@ -6,12 +6,13 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:12:45 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 03:37:38 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 05:46:56 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
 
+int		**g_initial;
 int		**g_target;
 int		g_size;
 

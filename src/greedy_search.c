@@ -6,19 +6,14 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 03:49:35 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 06:25:52 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
 
-static int		greedy_cost(int distance)
-{
-	return (distance);
-}
-
 static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
-					t_btree **explored, int (*fn) (int **board, int i, int j))
+					t_btree **explored, t_heuristic h)
 {
 	int		i;
 
@@ -29,7 +24,7 @@ static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 		{
 			tb_add(explored, successors[i]->board, 0, 0);
 			heapp_push(open, successors[i], greedy_cost(
-				heuristic(successors[i]->board, fn)), sizeof(t_state));
+				heuristic(successors[i]->board, h)), sizeof(t_state));
 			free(successors[i]);
 		}
 		else if (successors[i])
@@ -37,8 +32,7 @@ static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 	}
 }
 
-void			greedy_search(t_state *state,
-					int (*fn) (int **board, int i, int j))
+void			greedy_search(t_state *state, t_heuristic h)
 {
 	t_search_var	s;
 
@@ -46,7 +40,7 @@ void			greedy_search(t_state *state,
 	s = (t_search_var) {NULL, NULL, NULL, {NULL, NULL, NULL, NULL}, 0, 1};
 	tb_add(&s.explored, state->board, 0, 0);
 	heapp_push(&s.open, state,
-		greedy_cost(heuristic(state->board, fn)), sizeof(t_state));
+		greedy_cost(heuristic(state->board, h)), sizeof(t_state));
 	while (!heapp_is_empty(s.open))
 	{
 		s.node = heapp_pop(&s.open);
@@ -58,7 +52,7 @@ void			greedy_search(t_state *state,
 		}
 		get_successors(s.node, s.successors);
 		s.s_cmplx += count_successors(s.successors);
-		add_to_open_heapp(s.successors, &s.open, &s.explored, fn);
+		add_to_open_heapp(s.successors, &s.open, &s.explored, h);
 		free_state(s.node);
 	}
 	free_explored(&s.explored);

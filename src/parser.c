@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 03:01:37 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 06:13:51 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,14 @@ int				get_initial_state(t_state *state, char *filename)
 		return (ERROR);
 	}
 	if ((fp = fopen(filename, "r")) == NULL)
-	{
-		perror("Opening file");
 		return (ERROR);
-	}
 	if (!read_puzzle(state, fp))
 		return (ERROR);
 	if (!(g_target = init_grid()))
-	{
-		perror("Target mem alloc");
 		return (ERROR);
-	}
+	if (!(g_initial = init_grid()))
+		return (ERROR);
+	memcpy(*(g_initial), *(state->board), g_size * g_size * sizeof(int));
 	return (SUCCESS);
 }
 

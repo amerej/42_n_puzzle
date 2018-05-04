@@ -15,6 +15,7 @@ SRC_NAME= 	main.c \
 			a_star_search.c \
 			greedy_search.c \
 			uniform_cost_search.c \
+			cost_functions.c \
 			t_btree.c \
 			display.c \
 			command_line_parser.c

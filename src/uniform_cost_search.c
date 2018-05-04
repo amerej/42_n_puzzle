@@ -6,16 +6,11 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 10:05:30 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 03:49:34 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 06:27:48 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
-
-static int		uniform_cost(t_state *node)
-{
-	return (node->paths_size);
-}
 
 static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 					t_btree **explored)
@@ -37,10 +32,11 @@ static void		add_to_open_heapp(t_state *successors[4], t_heapp **open,
 	}
 }
 
-void			uniform_cost_search(t_state *state)
+void			uniform_cost_search(t_state *state, t_heuristic h)
 {
 	t_search_var	s;
 
+	(void)h;
 	display_initial_state(state->board, "UNIFORM COST SEARCH");
 	s = (t_search_var) {NULL, NULL, NULL, {NULL, NULL, NULL, NULL}, 0, 1};
 	tb_add(&s.explored, state->board, 0, 0);

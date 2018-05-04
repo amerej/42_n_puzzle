@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 22:10:58 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 03:40:11 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 06:28:46 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define N_MAX ((N * N) - 1)
 # define BUFFER_SIZE (((3 * N) + (1 * (N - 1))) + 1)
 
+extern int			**g_initial;
 extern int			**g_target;
 extern int			g_size;
 
@@ -60,6 +61,7 @@ typedef struct		s_argv
 	t_heuristic		heuristic;
 	t_search		search;
 	int				err_code;
+	int				type;
 }					t_argv;
 
 int					tb_explore(t_btree **explored, int **board, int x, int y);
@@ -81,11 +83,9 @@ t_state				*generate_move(t_state *state, t_position pos);
 void				get_successors(t_state *state, t_state *successors[4]);
 int					is_in_explored(int **board, t_list *explored);
 
-void				a_star_search(t_state *state, int(*fn)(int **board, int i,
-						int j));
-void				greedy_search(t_state *state, int(*fn)(int **board, int i,
-						int j));
-void				uniform_cost_search(t_state *state);
+void				a_star_search(t_state *state, t_heuristic h);
+void				greedy_search(t_state *state, t_heuristic h);
+void				uniform_cost_search(t_state *state, t_heuristic h);
 
 void				free_explored(t_btree **explored);
 void				free_open(t_heapp **open);
@@ -108,11 +108,19 @@ int					check_duplicate(int **board);
 int					is_number(char *str);
 void				free_split(char **split);
 int					get_split(t_state *state, char *line);
+t_position			get_empty(int **board);
 
 t_heuristic			get_heuristic(int argc, char *argv[]);
 t_search			get_search(int argc, char *argv[]);
 t_argv				parse_argv(int argc, char **argv);
 void				argv_err(int err_code);
+
+/*
+** COST FUNCTIONS
+*/
+int					a_star_cost(t_state *node, int distance);
+int					greedy_cost(int distance);
+int					uniform_cost(t_state *node);
 
 int					count_successors(t_state *successors[4]);
 #endif

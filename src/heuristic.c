@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 22:16:33 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/01 21:30:55 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/04 04:09:47 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ int					euclidean_distance(int **board, int i, int j)
 	return (res);
 }
 
-int					heuristic(int **board,
-						int (*fn) (int **board, int i, int j))
+int					heuristic(int **board, t_heuristic h)
 {
 	int		i;
 	int		j;
@@ -101,7 +100,7 @@ int					heuristic(int **board,
 	{
 		j = -1;
 		while (++j < g_size)
-			res += fn(board, i, j);
+			res += h(board, i, j);
 	}
 	return (res);
 }
