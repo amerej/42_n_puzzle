@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 06:13:51 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/07 14:53:16 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ int				get_board(t_state *state, char **split)
 int				get_initial_state(t_state *state, char *filename)
 {
 	FILE			*fp;
-	int				fd;
-	char			c;
 	struct stat		info;
 
 	if (stat(filename, &info) == -1)

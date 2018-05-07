@@ -6,7 +6,7 @@
 /*   By: aditsch <aditsch@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 09:04:17 by aditsch           #+#    #+#             */
-/*   Updated: 2018/05/04 03:10:47 by aditsch          ###   ########.fr       */
+/*   Updated: 2018/05/07 14:55:11 by aditsch          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ int		check_duplicate(int **board)
 
 int		is_number(char *str)
 {
-	int			i;
-	size_t		len;
+	int		i;
+	int		len;
 
 	i = -1;
-	len = strlen(str);
-	while (++i < len - 1)
+	len = strlen(str) - 1;
+	while (++i < len)
 		if (!isdigit(str[i]))
 			return (0);
 	return (1);

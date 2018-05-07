@@ -22,7 +22,7 @@ SRC_NAME= 	main.c \
 
 OBJ_NAME= $(SRC_NAME:.c=.o)
 
-# CFLAGS= -Werror -Wextra -Wall -g
+CFLAGS= -Werror -Wextra -Wall -g
 LDFLAGS = -L$(LFT_PATH) -g
 
 LDLIBS= -lm -lft
